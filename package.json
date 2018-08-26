@@ -1,0 +1,46 @@
+{
+  "name": "leva-eu",
+  "version": "1.0.0",
+  "description": "API REST do Leva-Eu",
+  "main": "server.js",
+  "scripts": {
+    "start": "cross-env DEBUG=leva-eu:* nodemon ./server.js",
+    "start:dev": "cross-env DEBUG=leva-eu:* NODE_ENV=development nodemon ./server.js",
+    "start:test": "cross-env DEBUG=leva-eu:* NODE_ENV=test nodemon ./server.js",
+    "start:prod": "cross-env DEBUG=leva-eu:* NODE_ENV=production nodemon ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evsoncustodio/leva-eu.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "author": "evsoncustodio",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/evsoncustodio/leva-eu/issues"
+  },
+  "homepage": "https://github.com/evsoncustodio/leva-eu#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.3",
+    "gridfs-stream": "^1.1.1",
+    "helmet": "^3.13.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.2.9",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.13.2"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}

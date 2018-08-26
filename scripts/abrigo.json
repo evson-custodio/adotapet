@@ -1,0 +1,38 @@
+{
+	"fotoPerfil": "5b82fb5f624db51c0c1f6cf4",
+	"usuários": [
+		{
+			"nome": "Pedro",
+			"username": "pedrinho",
+			"password": "123456"
+		},
+		{
+			"nome": "João",
+			"username": "joãozinho",
+			"password": "123456"
+		},
+		{
+			"nome": "Maria",
+			"username": "mariazinha",
+			"password": "123456"
+		}
+	],
+	"nome": "Patinhas Carentes",
+	"email": "patinhas.carentes@gmail.com",
+	"telefone": "27998530332",
+	"descrição": "Patinhas Carentes é um abrigo muito legal",
+	"endereço": {
+		"longradouro": "Rua Pet",
+		"número": "15",
+		"bairro": "Praia de Itaparica",
+		"cidade": "Vila Velha",
+		"uf": "ES",
+		"país": "Brasil",
+		"complemento": "Perto do Posto Ipiranga"
+	},
+	"responsável": {
+		"nome": "Ana Clara",
+		"email": "ana.clara@gmail.com",
+		"telefone": "27999844242"
+	}
+}
