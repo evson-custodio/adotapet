@@ -25,7 +25,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Usuário.findOneAndUpdate({_id: req.id}, req.body)
+            Usuário.findOneAndUpdate({_id: req.id}, req.body, {new: true})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);

@@ -26,7 +26,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Abrigo.findOneAndUpdate({_id: req.id}, req.body)
+            Abrigo.findOneAndUpdate({_id: req.id}, req.body, {new: true})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);

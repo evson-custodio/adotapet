@@ -1,0 +1,2 @@
+--require testes/unitarios/config/helpers.js
+--timeout 15000
