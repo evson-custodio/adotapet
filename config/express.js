@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const serveFavicon = require('serve-favicon');
 const serveStatic = require('serve-static');
 const logger = require('morgan');
+const cors = require('cors');
 const handlerError = require('errorhandler');
 
 module.exports.init = (api, port) => {
@@ -26,6 +27,8 @@ module.exports.init = (api, port) => {
 }
 
 module.exports.loadRoutes = (app, api) => {
+    app.use(cors());
+
     Object.keys(api.routes).forEach(routeName => {
         app.use('/api/' + routeName, api.routes[routeName]);
     });
