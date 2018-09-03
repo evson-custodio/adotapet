@@ -33,7 +33,7 @@ module.exports = (api) => {
             type: String
         },
         endereco: {
-            longradouro: {
+            logradouro: {
                 type: String,
                 required: true
             },

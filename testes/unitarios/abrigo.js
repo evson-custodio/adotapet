@@ -5,7 +5,7 @@ let defaultAbrigo = {
     "telefone": "2733218600",
     "descricao": "Este é um abrigo criado pelo teste funcional.",
     "endereco": {
-        "longradouro": "Rua Vasco Coutinho",
+        "logradouro": "Rua Vasco Coutinho",
         "numero": "878",
         "bairro": "Praia de Itaparica",
         "cidade": "Vila Velha",
@@ -35,7 +35,7 @@ describe('Route: Abrigo', function() {
                     assert.equal(defaultAbrigo.endereco.bairro, res.body.endereco.bairro);                  
                     assert.equal(defaultAbrigo.endereco.cidade, res.body.endereco.cidade);                  
                     assert.equal(defaultAbrigo.endereco.complemento, res.body.endereco.complemento);                  
-                    assert.equal(defaultAbrigo.endereco.longradouro, res.body.endereco.longradouro);                  
+                    assert.equal(defaultAbrigo.endereco.logradouro, res.body.endereco.logradouro);                  
                     assert.equal(defaultAbrigo.endereco.numero, res.body.endereco.numero);                  
                     assert.equal(defaultAbrigo.endereco.pais, res.body.endereco.pais);                  
                     assert.equal(defaultAbrigo.endereco.uf, res.body.endereco.uf);                  
