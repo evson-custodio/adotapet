@@ -7,7 +7,7 @@
     "start": "cross-env DEBUG=leva-eu:* nodemon ./server.js",
     "start:dev": "cross-env DEBUG=leva-eu:* NODE_ENV=development nodemon ./server.js",
     "start:test": "cross-env DEBUG=leva-eu:* NODE_ENV=test nodemon ./server.js",
-    "start:testesunitarios": "mocha --opts testes/unitarios/config/mocha.opts testes/unitarios/*.js",
+    "start:testesintegracao": "mocha --opts testes/integração/config/mocha.opts testes/integração/*.js",
     "start:prod": "cross-env DEBUG=leva-eu:* NODE_ENV=production nodemon ./server.js"
   },
   "repository": {
