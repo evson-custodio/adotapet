@@ -8,10 +8,10 @@ module.exports = (api) => {
             type: SchemaTypes.ObjectId,
             ref: 'File'
         },
-        usuários: [
+        usuarios: [
             {
                 type: SchemaTypes.ObjectId,
-                ref: 'Usuário'
+                ref: 'Usuario'
             }
         ],
         nome: {
@@ -29,15 +29,15 @@ module.exports = (api) => {
             required: true,
             unique: true
         },
-        descrição: {
+        descricao: {
             type: String
         },
-        endereço: {
+        endereco: {
             longradouro: {
                 type: String,
                 required: true
             },
-            número: {
+            numero: {
                 type: String,
                 default: 's/n'
             },
@@ -53,7 +53,7 @@ module.exports = (api) => {
                 type: String,
                 required: true
             },
-            país: {
+            pais: {
                 type: String,
                 required: true
             },
@@ -61,7 +61,7 @@ module.exports = (api) => {
                 type: String
             }
         },
-        responsável: {
+        responsavel: {
             nome: {
                 type: String,
                 required: true

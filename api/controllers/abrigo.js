@@ -16,7 +16,7 @@ module.exports = (api) => {
         },
         read: (req, res, next) => {
             Abrigo.findOne({_id: req.id})
-            .populate('usuários')
+            .populate('usuarios')
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -47,7 +47,7 @@ module.exports = (api) => {
         },
         list: (req, res, next) => {
             Abrigo.find()
-            .populate('usuários')
+            .populate('usuarios')
             .exec()
             .then(abrigos => {
                 res.json(abrigos);

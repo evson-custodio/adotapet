@@ -30,7 +30,7 @@ module.exports = {
         }
     },
     production: {
-        uri: 'mongodb://leva-eu:5lJ4SU9ql3lWsBF51Om3HNDi0d6OGIo6bNaduvD4MNiyTOshxtM6iXOKyKh0gIfxSkZyqmmpIDOFaS4rgT8uag==@leva-eu.documents.azure.com:10255/?ssl=true&replicaSet=globaldb',
+        uri: 'mongodb://localhost:27017/leva-eu-prod',
         options: {
             useNewUrlParser: true,
             autoIndex: false, // Don't build indexes

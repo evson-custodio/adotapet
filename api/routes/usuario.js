@@ -1,17 +1,17 @@
 module.exports = (api) => {
-    const UsuárioController = api.controllers.usuario;
+    const UsuarioController = api.controllers.usuario;
     const router = require('express').Router();
 
-    router.param('id', UsuárioController.id);
+    router.param('id', UsuarioController.id);
 
     router.route('/')
-    .get(UsuárioController.list)
-    .post(UsuárioController.create);
+    .get(UsuarioController.list)
+    .post(UsuarioController.create);
 
     router.route('/:id')
-    .get(UsuárioController.read)
-    .put(UsuárioController.update)
-    .delete(UsuárioController.delete);
+    .get(UsuarioController.read)
+    .put(UsuarioController.update)
+    .delete(UsuarioController.delete);
 
     return router;
 }

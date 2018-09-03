@@ -1,12 +1,12 @@
 module.exports = (api) => {
-    const Usuário = api.models.usuario;
+    const Usuario = api.models.usuario;
     return {
         id: (req, res, next, id) => {
             req.id = id;
             next();
         },
         create: (req, res, next) => {
-            Usuário.create(req.body)
+            Usuario.create(req.body)
             .then(abrigo => {
                 res.json(abrigo);
             })
@@ -15,7 +15,7 @@ module.exports = (api) => {
             });
         },
         read: (req, res, next) => {
-            Usuário.findOne({_id: req.id})
+            Usuario.findOne({_id: req.id})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -25,7 +25,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Usuário.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Usuario.findOneAndUpdate({_id: req.id}, req.body, {new: true})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -35,7 +35,7 @@ module.exports = (api) => {
             });
         },
         delete: (req, res, next) => {
-            Usuário.findOneAndRemove({_id: req.id})
+            Usuario.findOneAndRemove({_id: req.id})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -45,7 +45,7 @@ module.exports = (api) => {
             });
         },
         list: (req, res, next) => {
-            Usuário.find()
+            Usuario.find()
             .exec()
             .then(abrigos => {
                 res.json(abrigos);

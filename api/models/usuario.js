@@ -3,7 +3,7 @@ module.exports = (api) => {
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
-    const UsuárioSchema = new Schema({
+    const UsuarioSchema = new Schema({
         nome: {
             type: String,
             required: true
@@ -24,5 +24,5 @@ module.exports = (api) => {
         }
     });
 
-    return Mongoose.model('Usuário', UsuárioSchema);
+    return Mongoose.model('Usuario', UsuarioSchema);
 }

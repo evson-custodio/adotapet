@@ -3,17 +3,17 @@ let defaultAbrigo = {
     "nome": "Abrigo de Testes",
     "email": "testeunitario@gmail.com",
     "telefone": "2733218600",
-    "descrição": "Este é um abrigo criado pelo teste funcional.",
-    "endereço": {
+    "descricao": "Este é um abrigo criado pelo teste funcional.",
+    "endereco": {
         "longradouro": "Rua Vasco Coutinho",
-        "número": "878",
+        "numero": "878",
         "bairro": "Praia de Itaparica",
         "cidade": "Vila Velha",
         "uf": "ES",
-        "país": "Brasil",
+        "pais": "Brasil",
         "complemento": "Perto do Posto Ipiranga"
     },
-    "responsável": {
+    "responsavel": {
         "nome": "Will Smith",
         "email": "willgmail.com",
         "telefone": "27998681478"
@@ -29,23 +29,23 @@ describe('Route: Abrigo', function() {
                 .post('/api/abrigo')               
                 .send(defaultAbrigo)
                 .end((err, res) => {                                    
-                    assert.equal(defaultAbrigo.descrição, res.body.descrição);                  
+                    assert.equal(defaultAbrigo.descricao, res.body.descricao);                  
                     assert.equal(defaultAbrigo.email, res.body.email);                  
                    
-                    assert.equal(defaultAbrigo.endereço.bairro, res.body.endereço.bairro);                  
-                    assert.equal(defaultAbrigo.endereço.cidade, res.body.endereço.cidade);                  
-                    assert.equal(defaultAbrigo.endereço.complemento, res.body.endereço.complemento);                  
-                    assert.equal(defaultAbrigo.endereço.longradouro, res.body.endereço.longradouro);                  
-                    assert.equal(defaultAbrigo.endereço.número, res.body.endereço.número);                  
-                    assert.equal(defaultAbrigo.endereço.país, res.body.endereço.país);                  
-                    assert.equal(defaultAbrigo.endereço.uf, res.body.endereço.uf);                  
+                    assert.equal(defaultAbrigo.endereco.bairro, res.body.endereco.bairro);                  
+                    assert.equal(defaultAbrigo.endereco.cidade, res.body.endereco.cidade);                  
+                    assert.equal(defaultAbrigo.endereco.complemento, res.body.endereco.complemento);                  
+                    assert.equal(defaultAbrigo.endereco.longradouro, res.body.endereco.longradouro);                  
+                    assert.equal(defaultAbrigo.endereco.numero, res.body.endereco.numero);                  
+                    assert.equal(defaultAbrigo.endereco.pais, res.body.endereco.pais);                  
+                    assert.equal(defaultAbrigo.endereco.uf, res.body.endereco.uf);                  
                   
                     assert.equal(defaultAbrigo.fotoPerfil, res.body.fotoPerfil);                  
                     assert.equal(defaultAbrigo.nome, res.body.nome);                  
                     
-                    assert.equal(defaultAbrigo.responsável.email, res.body.responsável.email);                  
-                    assert.equal(defaultAbrigo.responsável.nome, res.body.responsável.nome);                  
-                    assert.equal(defaultAbrigo.responsável.telefone, res.body.responsável.telefone);   
+                    assert.equal(defaultAbrigo.responsavel.email, res.body.responsavel.email);                  
+                    assert.equal(defaultAbrigo.responsavel.nome, res.body.responsavel.nome);                  
+                    assert.equal(defaultAbrigo.responsavel.telefone, res.body.responsavel.telefone);   
                     
                     assert.equal(defaultAbrigo.telefone, res.body.telefone);          
                     
@@ -85,13 +85,13 @@ describe('Route: Abrigo', function() {
     describe('PUT /users/{id}', () => {
         it('atualiza um abrigo', done => {
             defaultAbrigo.nome = "DogHouse";
-            defaultAbrigo.descrição = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";            
+            defaultAbrigo.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";            
             request
             .put('/api/abrigo/' + ultimoAbrigoInseridoId)
             .send(defaultAbrigo)
             .end((err, res) => {
                 assert.equal(res.body.nome, defaultAbrigo.nome);                  
-                assert.equal(res.body.descrição, defaultAbrigo.descrição);                  
+                assert.equal(res.body.descricao, defaultAbrigo.descricao);                  
                 done(err);
             });
         });
