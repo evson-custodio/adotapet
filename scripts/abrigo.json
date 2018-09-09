@@ -4,7 +4,6 @@
 		"5b951c88bc66762b54afa809",
 		"5b951c9dbc66762b54afa80a"
 	],
-<<<<<<< HEAD
 	"nome": "Meu Abrigo",
 	"email": "email@abrigo.com",
 	"telefone": "27998547931",
@@ -14,17 +13,6 @@
 		"numero": "40",
 		"bairro": "Ipirapira",
 		"cidade": "Vaca Mole",
-=======
-	"nome": "Patinhas Carentes",
-	"email": "patinhas.carentes@gmail.com",
-	"telefone": "27998530332",
-	"descrição": "Patinhas Carentes é um abrigo muito legal",
-	"endereço": {
-		"logradouro": "Rua Pet",
-		"número": "15",
-		"bairro": "Praia de Itaparica",
-		"cidade": "Vila Velha",
->>>>>>> 23df55eb92982ad1131e207626c333bdddba6b1f
 		"uf": "ES",
 		"pais": "Brasil",
 		"complemento": "Perto da Porteira"
