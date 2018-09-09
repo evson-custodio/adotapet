@@ -1,11 +1,11 @@
 let defaultAbrigo = {
     "fotoPerfil": "5b82fb5f624db51c0c1f6cf4",
     "nome": "Abrigo de Testes",
-    "email": "testeunitario@gmail.com",
+    "email": "testes@levaeu.com",
     "telefone": "2733218600",
-    "descricao": "Este é um abrigo criado pelo teste funcional.",
+    "descricao": "Este é um abrigo criado pelo teste de integração.",
     "endereco": {
-        "longradouro": "Rua Vasco Coutinho",
+        "logradouro": "Rua Vasco Coutinho",
         "numero": "878",
         "bairro": "Praia de Itaparica",
         "cidade": "Vila Velha",
@@ -22,9 +22,9 @@ let defaultAbrigo = {
 
 let ultimoAbrigoInseridoId;
 
-describe('Route: Abrigo', function() {    
+describe('Rota: Abrigo', function() {    
     describe('POST /abrigo', () => {
-        it('insere um abrigo', function(done) {
+        it('insere um abrigo', done => {
             request
                 .post('/api/abrigo')               
                 .send(defaultAbrigo)
@@ -35,7 +35,7 @@ describe('Route: Abrigo', function() {
                     assert.equal(defaultAbrigo.endereco.bairro, res.body.endereco.bairro);                  
                     assert.equal(defaultAbrigo.endereco.cidade, res.body.endereco.cidade);                  
                     assert.equal(defaultAbrigo.endereco.complemento, res.body.endereco.complemento);                  
-                    assert.equal(defaultAbrigo.endereco.longradouro, res.body.endereco.longradouro);                  
+                    assert.equal(defaultAbrigo.endereco.logradouro, res.body.endereco.logradouro);                  
                     assert.equal(defaultAbrigo.endereco.numero, res.body.endereco.numero);                  
                     assert.equal(defaultAbrigo.endereco.pais, res.body.endereco.pais);                  
                     assert.equal(defaultAbrigo.endereco.uf, res.body.endereco.uf);                  
@@ -57,7 +57,7 @@ describe('Route: Abrigo', function() {
     });
   
     describe('GET /abrigo/{id}', () => {
-        it('retorna um abrigo por id', function(done)  {
+        it('retorna um abrigo por id', done => {
             request
                 .get('/api/abrigo/'+ ultimoAbrigoInseridoId)
                 .end((err, res) => {
@@ -68,8 +68,8 @@ describe('Route: Abrigo', function() {
         });
     });
 
-    describe('GET /abrigo', function() {
-        it('retorna uma lista de abrigos', function(done) {
+    describe('GET /abrigo', () => {
+        it('retorna uma lista de abrigos', done => {
             request
                 .get('/api/abrigo/')
                 .end(function(err, res){
@@ -87,18 +87,19 @@ describe('Route: Abrigo', function() {
             defaultAbrigo.nome = "DogHouse";
             defaultAbrigo.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";            
             request
-            .put('/api/abrigo/' + ultimoAbrigoInseridoId)
-            .send(defaultAbrigo)
-            .end((err, res) => {
-                assert.equal(res.body.nome, defaultAbrigo.nome);                  
-                assert.equal(res.body.descricao, defaultAbrigo.descricao);                  
-                done(err);
-            });
+                .put('/api/abrigo/' + ultimoAbrigoInseridoId)
+                .send(defaultAbrigo)
+                .end((err, res) => {
+                    assert.equal(res.body.nome, defaultAbrigo.nome);                  
+                    assert.equal(res.body.descricao, defaultAbrigo.descricao);    
+                    assert.equal(res.body.email, defaultAbrigo.email); 
+                    done(err);
+                });
         });
     });    
 
     describe('DELETE /abrigo/{id}', () => {
-        it('deleta um abrigo', function(done) {
+        it('deleta um abrigo', done => {
             request
                 .delete('/api/abrigo/' + ultimoAbrigoInseridoId)
                 .end((err, res) => {
@@ -106,6 +107,6 @@ describe('Route: Abrigo', function() {
                     done(err);
                 });
         });
-      });    
+    });    
 
 });

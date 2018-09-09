@@ -15,7 +15,7 @@ function createServer(port) {
                 // Object.keys(api.routes).forEach(v => debug(v));
             });
 
-            resolve(server);
+            resolve(api);
         })
         .catch(error => {
             debug('Error: ' + error);
