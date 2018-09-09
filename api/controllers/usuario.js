@@ -1,5 +1,8 @@
+const debug = require('debug')('leva-eu:api:controllers:usuario');
+
 module.exports = (api) => {
-    const Usuario = api.models.usuario;
+    // const Usuario = api.models.usuario;
+    const Usuario = require('mongoose').model('Usuario');
     return {
         id: (req, res, next, id) => {
             req.id = id;
@@ -7,8 +10,8 @@ module.exports = (api) => {
         },
         create: (req, res, next) => {
             Usuario.create(req.body)
-            .then(abrigo => {
-                res.json(abrigo);
+            .then(usuario => {
+                res.json(usuario);
             })
             .catch(error => {
                 res.json(error);
@@ -17,8 +20,8 @@ module.exports = (api) => {
         read: (req, res, next) => {
             Usuario.findOne({_id: req.id})
             .exec()
-            .then(abrigo => {
-                res.json(abrigo);
+            .then(usuario => {
+                res.json(usuario);
             })
             .catch(error => {
                 res.json(error);
@@ -27,8 +30,8 @@ module.exports = (api) => {
         update: (req, res, next) => {
             Usuario.findOneAndUpdate({_id: req.id}, req.body, {new: true})
             .exec()
-            .then(abrigo => {
-                res.json(abrigo);
+            .then(usuario => {
+                res.json(usuario);
             })
             .catch(error => {
                 res.json(error);
@@ -37,18 +40,50 @@ module.exports = (api) => {
         delete: (req, res, next) => {
             Usuario.findOneAndRemove({_id: req.id})
             .exec()
-            .then(abrigo => {
-                res.json(abrigo);
+            .then(usuario => {
+                res.json(usuario);
             })
             .catch(error => {
                 res.json(error);
             });
         },
         list: (req, res, next) => {
-            Usuario.find()
+            Usuario.find(req.query)
             .exec()
-            .then(abrigos => {
-                res.json(abrigos);
+            .then(usuarios => {
+                res.json(usuarios);
+            })
+            .catch(error => {
+                res.json(error);
+            });
+        },
+        authenticate: (req, res, next) => {
+            Usuario.findOne({
+                // password: req.headers.password,
+                $or: [
+                    {
+                        username: req.headers['username-email']
+                    },
+                    {
+                        email: req.headers['username-email']
+                    }
+                ]
+            })
+            .exec()
+            .then(usuario => {
+                if (usuario == null) {
+                    res.status(404).json({
+                        message: 'Nome de Usuario ou E-mail não encontrados.'
+                    });
+                }
+                else if (usuario.password !== req.headers.password) {
+                    res.json({
+                        message: 'Senha Incorreta.'
+                    });
+                }
+                else {
+                    res.json(usuario);
+                }
             })
             .catch(error => {
                 res.json(error);

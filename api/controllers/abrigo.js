@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Abrigo = api.models.abrigo;
+    // const Abrigo = require('mongoose').model('Abrigo');
     return {
         id: (req, res, next, id) => {
             req.id = id;
@@ -46,7 +47,15 @@ module.exports = (api) => {
             });
         },
         list: (req, res, next) => {
-            Abrigo.find()
+            let keys = Object.keys(req.query);
+            if (keys.length > 0) {
+                if (keys.includes('usuarios')) {
+                    req.query.usuarios = {
+                        $in: req.query.usuarios
+                    }
+                }
+            }
+            Abrigo.find(req.query)
             .populate('usuarios')
             .exec()
             .then(abrigos => {
