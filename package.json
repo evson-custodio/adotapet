@@ -1,6 +1,6 @@
 {
   "name": "leva-eu",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "API REST do Leva-Eu",
   "main": "server.js",
   "scripts": {

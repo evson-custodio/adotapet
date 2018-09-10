@@ -4,6 +4,8 @@ module.exports = (api) => {
 
     router.param('id', UsuarioController.id);
 
+    router.get('/authenticate', UsuarioController.authenticate);
+
     router.route('/')
     .get(UsuarioController.list)
     .post(UsuarioController.create);

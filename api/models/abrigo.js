@@ -29,6 +29,11 @@ module.exports = (api) => {
             required: true,
             unique: true
         },
+        cnpj: {
+            type: String,
+            required: true,
+            unique: true
+        },
         descricao: {
             type: String
         },
