@@ -1,6 +1,6 @@
 const chai = require("chai");
 const supertest = require("supertest");
-//const app = require('../../../config/express');
+//require('../../../server');
 
 global.assert = chai.assert;
 global.expect = chai.expect;
