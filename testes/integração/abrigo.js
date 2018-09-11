@@ -56,6 +56,18 @@ describe('Rota: Abrigo', function() {
                     done(err);
                 });
         });
+    });
+    
+    describe('POST /abrigo', () => {
+        it('impede o registro de um abrigo caso o usuário insira um valor em um campo único que já esteja cadastrado (Ex: CNPJ)', done => {
+            request
+                .post('/api/abrigo')               
+                .send(defaultAbrigo)
+                .end((err, res) => {                                    
+                    assert.equal(res.body.code, 11000);  // 11000 = duplicate key                                                                                   
+                    done(err);
+                });
+        });
     });    
   
     describe('GET /abrigo/{id}', () => {
