@@ -108,7 +108,7 @@ describe('Rota: Abrigo', function() {
                 .end((err, res) => {                                    
                     erros = res.body.errors;
                     
-                    assert.equal(Object.keys(erros).length, 11); // Quantidade de campos obrigatórios
+                    assert.equal(Object.keys(erros).length, 12); // Quantidade de campos obrigatórios
 
                     assert.equal(erros["responsavel.telefone"].kind, "required"); 
                     assert.equal(erros["responsavel.email"].kind, "required"); 
