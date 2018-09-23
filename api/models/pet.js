@@ -2,6 +2,10 @@ module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
+
+    const Medicamento = api.models.medicamento;
+    const Vacina = api.models.vacina;
+    const Caracteristica = api.models.caracteristica;
     
     const PetSchema = new Schema({
         foto: {
@@ -62,7 +66,14 @@ module.exports = (api) => {
             type: Boolean,
             required: true,
             unique: false   
-        },        
+        },
+        medicamentos: [
+            {
+                type: Medicamento,
+                required: false,
+                unique: false
+            }
+        ],        
         alimentacaoEspecifica: {
             type: Boolean,
             required: true,
@@ -83,6 +94,18 @@ module.exports = (api) => {
         deficienciaDoenca: {
             type: String,
             required: false,
+            unique: false
+        },
+        vacinacao: [
+            {
+                type: Vacina,
+                required: true,
+                unique: false
+            }
+        ],
+        caracteristica: {
+            type: Caracteristica,
+            required: true,
             unique: false
         }
     })
