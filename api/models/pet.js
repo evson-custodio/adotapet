@@ -3,8 +3,12 @@ module.exports = (api) => {
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
+    const Medicamento = api.models.medicamento;
+    const Vacina = api.models.vacina;
+    const Caracteristica = api.models.caracteristica;
+
     const PetSchema = new Schema({
-        fotoPerfil: {
+        foto: {
             type: SchemaTypes.ObjectId,
             ref: 'File'
         },                
@@ -14,7 +18,7 @@ module.exports = (api) => {
             unique: false
         },
         idade: {
-            type: float,
+            type: String,
             required: true,
             unique: false
         },
@@ -49,22 +53,22 @@ module.exports = (api) => {
             unique: false
         },
         sexo: {
-            type: boolean,
+            type: Boolean,
             required: true,
             unique: false
         },
         castrado: {
-            type: boolean,
+            type: Boolean,
             required: true,
             unique: false
         },
-        medicacaoEspecifica: {
-            type: boolean,
+        medicamentoEspecifico: {
+            type: Boolean,
             required: true,
-            unique: false
-        },
+            unique: false   
+        },        
         alimentacaoEspecifica: {
-            type: boolean,
+            type: Boolean,
             required: true,
             unique: false
         },
@@ -75,12 +79,12 @@ module.exports = (api) => {
                 unique: false
             }
         ],
-        disponivel: {
-            type: boolean,
+        disponivelAdocao: {
+            type: Boolean,
             required: true,
             unique: false
         },
-        deficiencia: {
+        deficienciaDoenca: {
             type: String,
             required: false,
             unique: false
