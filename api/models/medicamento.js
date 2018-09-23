@@ -3,7 +3,7 @@ module.exports = (api) => {
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
-    const Medicamento = new Schema({
+    const MedicamentoSchema = new Schema({
         usoContinuo: {
             type: Boolean,
             required: true,
@@ -24,5 +24,7 @@ module.exports = (api) => {
             required: true,
             unique: false
         }
-    })
+    });
+
+    return Mongoose.model('Medicamento', MedicamentoSchema);
 }

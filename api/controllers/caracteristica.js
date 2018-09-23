@@ -1,7 +1,8 @@
 const debug = require('debug')('leva-eu:api:controllers:caracteristica');
 
 module.exports = (api) => {
-    const Caracteristica = require('mongoose').model('Caracteristica');
+    const Caracteristica = api.models.caracteristica;
+    // const Caracteristica = require('mongoose').model('Caracteristica');
 
     return {
         id: (req, res, next, id) => {
@@ -10,7 +11,7 @@ module.exports = (api) => {
         },
         create: (req, res, next) => {
             Caracteristica.create(req.body)
-            .then(usuario => {
+            .then(caracteristica => {
                 res.json(caracteristica);
             })
             .catch(error => {
@@ -50,7 +51,7 @@ module.exports = (api) => {
         list: (req, res, next) => {
             Caracteristica.find(req.query)
             .exec()
-            .then(usuarios => {
+            .then(caracteristicas => {
                 res.json(caracteristicas);
             })
             .catch(error => {

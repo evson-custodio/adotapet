@@ -1,7 +1,8 @@
 const debug = require('debug')('leva-eu:api:controllers:medicamento');
 
 module.exports = (api) => {
-    const Medicamento = require('mongoose').model('Medicamento');
+    const Medicamento = api.models.medicamento;
+    // const Medicamento = require('mongoose').model('Medicamento');
 
     return {
         id: (req, res, next, id) => {
@@ -9,8 +10,8 @@ module.exports = (api) => {
             next();
         },
         create: (req, res, next) => {
-            Usuario.create(req.body)
-            .then(usuario => {
+            Medicamento.create(req.body)
+            .then(medicamento => {
                 res.json(medicamento);
             })
             .catch(error => {
@@ -18,7 +19,7 @@ module.exports = (api) => {
             });
         },
         read: (req, res, next) => {
-            Usuario.findOne({_id: req.id})
+            Medicamento.findOne({_id: req.id})
             .exec()
             .then(medicamento => {
                 res.json(medicamento);
@@ -28,7 +29,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Usuario.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Medicamento.findOneAndUpdate({_id: req.id}, req.body, {new: true})
             .exec()
             .then(medicamento => {
                 res.json(medicamento);
@@ -38,7 +39,7 @@ module.exports = (api) => {
             });
         },
         delete: (req, res, next) => {
-            Usuario.findOneAndRemove({_id: req.id})
+            Medicamento.findOneAndRemove({_id: req.id})
             .exec()
             .then(medicamento => {
                 res.json(medicamento);
@@ -50,7 +51,7 @@ module.exports = (api) => {
         list: (req, res, next) => {
             Medicamento.find(req.query)
             .exec()
-            .then(usuarios => {
+            .then(medicamentos => {
                 res.json(medicamentos);
             })
             .catch(error => {

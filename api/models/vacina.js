@@ -3,7 +3,7 @@ module.exports = (api) => {
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
-    const Vacina = new Schema({
+    const VacinaSchema = new Schema({
         nome: {
             type: String,
             required: true,
@@ -24,5 +24,7 @@ module.exports = (api) => {
             required: true,
             unique: false
         }
-    })
+    });
+
+    return Mongoose.model('Vacina', VacinaSchema);
 }
