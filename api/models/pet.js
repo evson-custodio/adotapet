@@ -20,7 +20,7 @@ module.exports = (api) => {
         },
         especie: {
             type: String,
-            required = true,
+            required: true,
             unique: false
         },
         raca: {
