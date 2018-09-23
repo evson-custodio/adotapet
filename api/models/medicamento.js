@@ -1,4 +1,4 @@
-model.exports = (api) => {
+module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
