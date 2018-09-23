@@ -1,8 +1,8 @@
 const debug = require('debug')('leva-eu:api:controllers:usuario');
 
 module.exports = (api) => {
-    // const Usuario = api.models.usuario;
-    const Usuario = require('mongoose').model('Usuario');
+    const Usuario = api.models.usuario;
+    // const Usuario = require('mongoose').model('Usuario');
     return {
         id: (req, res, next, id) => {
             req.id = id;

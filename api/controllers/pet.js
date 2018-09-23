@@ -1,7 +1,8 @@
 const debug = require('debug')('leva-eu:api:controllers:pet');
 
 module.exports = (api) =>{
-    const Pet = require('mongoose').model('Pet');
+    const Pet = api.models.pet;
+    // const Pet = require('mongoose').model('Pet');
     return{
         id: (req, res, next, id) => {
             req.id = id;

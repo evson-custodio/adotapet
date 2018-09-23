@@ -2,7 +2,7 @@ module.exports = (api) => {
     const PetController = api.controllers.pet;
     const router = require('express').Router();
 
-    router.param('id', UsuarioController.id);
+    router.param('id', PetController.id);
 
     router.route('/')
     .get(PetController.list)

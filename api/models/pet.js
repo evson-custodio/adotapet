@@ -85,5 +85,7 @@ module.exports = (api) => {
             required: false,
             unique: false
         }
-    })
+    });
+
+    return Mongoose.model('Pet', PetSchema);
 }
