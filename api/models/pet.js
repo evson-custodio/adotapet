@@ -7,13 +7,7 @@ module.exports = (api) => {
         fotoPerfil: {
             type: SchemaTypes.ObjectId,
             ref: 'File'
-        },
-        pets: [
-            {
-                type: SchemaTypes.ObjectId,
-                ref: 'Pet'
-            }
-        ],        
+        },                
         nome: {
             type: String,
             required: true,
