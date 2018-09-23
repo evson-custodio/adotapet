@@ -3,7 +3,7 @@ module.exports = (api) => {
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
-    const Caracteristica = new Schema({
+    const CaracteristicaSchema = new Schema({
         pergunta: {
             type: String,
             required: true,
@@ -14,5 +14,7 @@ module.exports = (api) => {
             required: true,
             unique: false
         }
-    })
+    });
+
+    return Mongoose.model('Caracteristica', CaracteristicaSchema);
 }

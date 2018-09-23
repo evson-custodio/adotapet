@@ -19,6 +19,9 @@ module.exports = (api) =>{
         },
         read: (req, res, next) => {
             Pet.findOne({_id: req.id})
+            .populate('medicamentos')
+            .populate('vacinacao')
+            .populate('caracteristica')
             .exec()
             .then(pet => {
                 res.json(pet);
@@ -49,6 +52,9 @@ module.exports = (api) =>{
         },
         list: (req, res, next) => {
             Pet.find(req.query)
+            .populate('medicamentos')
+            .populate('vacinacao')
+            .populate('caracteristica')
             .exec()
             .then(pets => {
                 res.json(pets);

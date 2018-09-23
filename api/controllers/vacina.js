@@ -1,7 +1,8 @@
 const debug = require('debug')('leva-eu:api:controllers:vacina');
 
 module.exports = (api) => {
-    const Vacina = require('mongoose').model('Vacina');
+    const Vacina = api.models.vacina;
+    // const Vacina = require('mongoose').model('Vacina');
 
     return {
         id: (req, res, next, id) => {
@@ -10,7 +11,7 @@ module.exports = (api) => {
         },
         create: (req, res, next) => {
             Vacina.create(req.body)
-            .then(usuario => {
+            .then(vacina => {
                 res.json(vacina);
             })
             .catch(error => {
@@ -50,7 +51,7 @@ module.exports = (api) => {
         list: (req, res, next) => {
             Vacina.find(req.query)
             .exec()
-            .then(usuarios => {
+            .then(vacinas => {
                 res.json(vacinas);
             })
             .catch(error => {

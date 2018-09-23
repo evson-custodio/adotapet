@@ -2,10 +2,6 @@ module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
-
-    const Medicamento = api.models.medicamento;
-    const Vacina = api.models.vacina;
-    const Caracteristica = api.models.caracteristica;
     
     const PetSchema = new Schema({
         foto: {
@@ -69,9 +65,8 @@ module.exports = (api) => {
         },
         medicamentos: [
             {
-                type: Medicamento,
-                required: false,
-                unique: false
+                type: 'ObjectId',
+                ref: 'Medicamento'
             }
         ],        
         alimentacaoEspecifica: {
@@ -98,15 +93,13 @@ module.exports = (api) => {
         },
         vacinacao: [
             {
-                type: Vacina,
-                required: true,
-                unique: false
+                type: 'ObjectId',
+                ref: 'Vacina'
             }
         ],
         caracteristica: {
-            type: Caracteristica,
-            required: true,
-            unique: false
+            type: 'ObjectId',
+            ref: 'Caracteristica'
         }
     });
 

@@ -1,9 +1,9 @@
-model.exports = (api) => {
+module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
     const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
-    const Medicamento = new Schema({
+    const MedicamentoSchema = new Schema({
         usoContinuo: {
             type: Boolean,
             required: true,
@@ -24,5 +24,7 @@ model.exports = (api) => {
             required: true,
             unique: false
         }
-    })
+    });
+
+    return Mongoose.model('Medicamento', MedicamentoSchema);
 }
