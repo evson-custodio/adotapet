@@ -7,3 +7,5 @@ global.assert = chai.assert;
 global.expect = chai.expect;
 global.request = supertest("http://localhost:1337");
 global.isSubset = require("is-subset");
+
+global.ultimoAbrigoInseridoId;

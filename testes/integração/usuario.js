@@ -31,7 +31,8 @@ describe('Rota: Usuario', function() {
                 .post('/api/usuario')               
                 .send(defaultUsuario)
                 .end((err, res) => {                                    
-                    assert.equal(res.body.code, 11000);  // 11000 = duplicate key                                                                                   
+                    assert.equal(res.body.errors.email.kind, "unique");                                                         
+                    assert.equal(res.body.errors.username.kind, "unique");                                                         
                     done(err);
                 });
         });
