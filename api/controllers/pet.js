@@ -10,9 +10,26 @@ module.exports = (api) =>{
             next();
         },
         create: (req, res, next) => {
+            req.body.porte = req.body.porte.trim();
+            req.body.porte = req.body.porte.toLocaleLowerCase();
             Pet.create(req.body)
             .then(pet => {
-                res.json(pet);
+                Abrigo.findOne({_id: pet.abrigo})
+                .exec()
+                .then(abrigo => {
+                    abrigo.pets.push(pet._id);
+                    Abrigo.findOneAndUpdate({_id: abrigo._id}, abrigo, {runValidators: true, context: 'query', new: true})
+                    .exec()
+                    .then(abrigo => {
+                        res.json(pet);
+                    })
+                    .catch(error => {
+                        res.json(error);
+                    });
+                })
+                .catch(error => {
+                    res.json(error);
+                });
             })
             .catch(error => {
                 res.json(error);

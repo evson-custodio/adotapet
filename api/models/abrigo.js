@@ -1,4 +1,5 @@
 const uniqueValidator = require('mongoose-unique-validator');
+const validator = require('validator');
 
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
@@ -29,17 +30,34 @@ module.exports = (api) => {
         email: {
             type: String,
             required: [true, 'A propriedade "email" é obrigatória!'],
-            unique: true
+            unique: true,
+            validate: {
+                validator: (v) => validator.isEmail(v),
+                message: props => `${props.value} não é um "email" valido!`
+            }
         },
         telefone: {
             type: String,
             required: [true, 'A propriedade "telefone" é obrigatória!'],
-            unique: true
+            unique: true,
+            validate: {
+                validator: (v) => {
+                    return /\(\d{2}\)\d?\d{4}-\d{4}/.text(v);
+                },
+                message: props => `${props.value} não é um "telefone" valido!`
+            }
         },
         cnpj: {
             type: String,
             required: [true, 'A propriedade "cnpj" é obrigatória!'],
-            unique: true
+            unique: true,
+            // xx.xxx.xxx/xxxx-xx
+            validate: {
+                validator: (v) => {
+                    return /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.text(v);
+                },
+                message: props => `${props.value} não é um "cnpj" valido!`
+            }
         },
         descricao: {
             type: String
@@ -81,12 +99,22 @@ module.exports = (api) => {
             email: {
                 type: String,
                 required: [true, 'A propriedade "responsavel.email" é obrigatória!'],
-                unique: true
+                unique: true,
+                validate: {
+                    validator: (v) => validator.isEmail(v),
+                    message: props => `${props.value} não é um "responsavel.email" valido!`
+                }
             },
             telefone: {
                 type: String,
                 required: [true, 'A propriedade "responsavel.telefone" é obrigatória!'],
-                unique: true
+                unique: true,
+                validate: {
+                    validator: (v) => {
+                        return /\(\d{2}\)\d?\d{4}-\d{4}/.text(v);
+                    },
+                    message: props => `${props.value} não é um "responsavel.telefone" valido!`
+                }
             }
         }
     });

@@ -2,7 +2,9 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
+    // const Mongoose = require('mongoose');
     const Schema = api.mongoose.Mongoose.Schema;
+    // const Schema = Mongoose.Schema;
     
     const PetSchema = new Schema({
         foto: {
@@ -47,7 +49,15 @@ module.exports = (api) => {
         porte: {
             type: String,
             required: [true, 'A propriedade "porte" é obrigatória!'],
-            unique: false
+            unique: false,
+            lowercase: true,
+            trim: true,
+            validate: {
+                validator: (v) => {
+                    return /pequeno|médio|grande/.text(v);
+                },
+                message: props => `${props.value} não é um "porte" valido!`
+            }
         },
         historia: {
             type: String,
