@@ -1,11 +1,12 @@
+const uniqueValidator = require('mongoose-unique-validator');
+
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
-    const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
     
     const PetSchema = new Schema({
         foto: {
-            type: SchemaTypes.ObjectId,
+            type: 'ObjectId',
             ref: 'File'
         },                
         nome: {
@@ -102,6 +103,8 @@ module.exports = (api) => {
             ref: 'Caracteristica'
         }
     });
+
+    PetSchema.plugin(uniqueValidator);
 
     return Mongoose.model('Pet', PetSchema);
 }

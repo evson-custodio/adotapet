@@ -1,7 +1,8 @@
+const uniqueValidator = require('mongoose-unique-validator');
+
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
-    const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
     const UsuarioSchema = new Schema({
         nome: {
@@ -23,6 +24,8 @@ module.exports = (api) => {
             required: true
         }
     });
+
+    UsuarioSchema.plugin(uniqueValidator);
 
     return Mongoose.model('Usuario', UsuarioSchema);
 }

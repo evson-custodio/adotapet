@@ -1,7 +1,8 @@
+const uniqueValidator = require('mongoose-unique-validator');
+
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
-    const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
     const VacinaSchema = new Schema({
         nome: {
@@ -25,6 +26,8 @@ module.exports = (api) => {
             unique: false
         }
     });
+
+    VacinaSchema.plugin(uniqueValidator);
 
     return Mongoose.model('Vacina', VacinaSchema);
 }
