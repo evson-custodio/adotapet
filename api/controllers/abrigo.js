@@ -18,6 +18,7 @@ module.exports = (api) => {
         read: (req, res, next) => {
             Abrigo.findOne({_id: req.id})
             .populate('usuarios')
+            .populate('pets')
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -27,7 +28,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Abrigo.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Abrigo.findOneAndUpdate({_id: req.id}, req.body, {runValidators: true, context: 'query', new: true})
             .exec()
             .then(abrigo => {
                 res.json(abrigo);
@@ -54,9 +55,15 @@ module.exports = (api) => {
                         $in: req.query.usuarios
                     }
                 }
+                if (keys.includes('pets')) {
+                    req.query.pets = {
+                        $in: req.query.pets
+                    }
+                }
             }
             Abrigo.find(req.query)
             .populate('usuarios')
+            .populate('pets')
             .exec()
             .then(abrigos => {
                 res.json(abrigos);

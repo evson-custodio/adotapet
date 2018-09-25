@@ -7,7 +7,7 @@ let defaultUsuario = {
 
 let ultimoUsuarioInseridoId;
 
-describe('Rota: usuario', function() {    
+describe('Rota: Usuario', function() {    
     describe('POST /usuario', () => {
         it('insere um usuario', done => {
             request
@@ -31,7 +31,8 @@ describe('Rota: usuario', function() {
                 .post('/api/usuario')               
                 .send(defaultUsuario)
                 .end((err, res) => {                                    
-                    assert.equal(res.body.code, 11000);  // 11000 = duplicate key                                                                                   
+                    assert.equal(res.body.errors.email.kind, "unique");                                                         
+                    assert.equal(res.body.errors.username.kind, "unique");                                                         
                     done(err);
                 });
         });

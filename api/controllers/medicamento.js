@@ -29,7 +29,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Medicamento.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Medicamento.findOneAndUpdate({_id: req.id}, req.body, {runValidators: true, context: 'query', new: true})
             .exec()
             .then(medicamento => {
                 res.json(medicamento);
