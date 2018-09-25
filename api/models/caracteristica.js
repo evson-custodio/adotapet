@@ -1,4 +1,5 @@
 const uniqueValidator = require('mongoose-unique-validator');
+const validator = require('validator');
 
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
