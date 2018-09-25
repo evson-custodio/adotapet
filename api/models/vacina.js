@@ -1,17 +1,18 @@
+const uniqueValidator = require('mongoose-unique-validator');
+
 module.exports = (api) => {
     const Mongoose = api.mongoose.Mongoose;
     const Schema = api.mongoose.Mongoose.Schema;
-    const SchemaTypes = api.mongoose.Mongoose.SchemaTypes;
 
     const VacinaSchema = new Schema({
         nome: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "nome" é obrigatória!'],
             unique: false
         },
         descricao: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "descricao" é obrigatória!'],
             unique: false
         },
         data: {
@@ -21,10 +22,12 @@ module.exports = (api) => {
         },
         aplicada: {
             type: Boolean,
-            required: true,
+            required: [true, 'A propriedade "aplicada" é obrigatória!'],
             unique: false
         }
     });
+
+    VacinaSchema.plugin(uniqueValidator);
 
     return Mongoose.model('Vacina', VacinaSchema);
 }

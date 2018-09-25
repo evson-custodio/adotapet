@@ -3,7 +3,6 @@ module.exports = {
         uri: 'mongodb://localhost:27017/leva-eu-dev',
         options: {
             useNewUrlParser: true,
-            autoIndex: false, // Don't build indexes
             reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
             reconnectInterval: 500, // Reconnect every 500ms
             poolSize: 10, // Maintain up to 10 socket connections
@@ -18,7 +17,6 @@ module.exports = {
         uri: 'mongodb://localhost:27017/leva-eu-test',
         options: {
             useNewUrlParser: true,
-            autoIndex: false, // Don't build indexes
             reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
             reconnectInterval: 500, // Reconnect every 500ms
             poolSize: 10, // Maintain up to 10 socket connections
@@ -33,7 +31,7 @@ module.exports = {
         uri: 'mongodb://localhost:27017/leva-eu-prod',
         options: {
             useNewUrlParser: true,
-            autoIndex: false, // Don't build indexes
+            // autoIndex: false, // Don't build indexes
             reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
             reconnectInterval: 500, // Reconnect every 500ms
             poolSize: 10, // Maintain up to 10 socket connections
