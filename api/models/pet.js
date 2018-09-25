@@ -54,7 +54,7 @@ module.exports = (api) => {
             trim: true,
             validate: {
                 validator: (v) => {
-                    return /pequeno|médio|grande/.text(v);
+                    return /pequeno|médio|grande/.test(v);
                 },
                 message: props => `${props.value} não é um "porte" valido!`
             }

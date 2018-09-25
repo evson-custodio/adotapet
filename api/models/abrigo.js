@@ -42,7 +42,7 @@ module.exports = (api) => {
             unique: true,
             validate: {
                 validator: (v) => {
-                    return /\(\d{2}\)\d?\d{4}-\d{4}/.text(v);
+                    return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
                 },
                 message: props => `${props.value} não é um "telefone" valido!`
             }
@@ -54,7 +54,7 @@ module.exports = (api) => {
             // xx.xxx.xxx/xxxx-xx
             validate: {
                 validator: (v) => {
-                    return /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.text(v);
+                    return /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.test(v);
                 },
                 message: props => `${props.value} não é um "cnpj" valido!`
             }
@@ -111,7 +111,7 @@ module.exports = (api) => {
                 unique: true,
                 validate: {
                     validator: (v) => {
-                        return /\(\d{2}\)\d?\d{4}-\d{4}/.text(v);
+                        return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
                     },
                     message: props => `${props.value} não é um "responsavel.telefone" valido!`
                 }
