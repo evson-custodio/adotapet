@@ -7,7 +7,7 @@ let defaultUsuario = {
 
 let ultimoUsuarioInseridoId;
 
-describe('Rota: usuario', function() {    
+describe('Rota: Usuario', function() {    
     describe('POST /usuario', () => {
         it('insere um usuario', done => {
             request
