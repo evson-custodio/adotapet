@@ -28,7 +28,7 @@ module.exports = (api) => {
             });
         },
         update: (req, res, next) => {
-            Usuario.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Usuario.findOneAndUpdate({_id: req.id}, req.body, {runValidators: true, context: 'query', new: true})
             .exec()
             .then(usuario => {
                 res.json(usuario);

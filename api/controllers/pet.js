@@ -2,6 +2,7 @@ const debug = require('debug')('leva-eu:api:controllers:pet');
 
 module.exports = (api) =>{
     const Pet = api.models.pet;
+    const Abrigo = api.models.abrigo;
     // const Pet = require('mongoose').model('Pet');
     return{
         id: (req, res, next, id) => {
@@ -19,6 +20,7 @@ module.exports = (api) =>{
         },
         read: (req, res, next) => {
             Pet.findOne({_id: req.id})
+            .populate('abrigo')
             .populate('medicamentos')
             .populate('vacinacao')
             .populate('caracteristica')
@@ -31,7 +33,7 @@ module.exports = (api) =>{
             });
         },
         update: (req, res, next) => {
-            Pet.findOneAndUpdate({_id: req.id}, req.body, {new: true})
+            Pet.findOneAndUpdate({_id: req.id}, req.body, {runValidators: true, context: 'query', new: true})
             .exec()
             .then(pet => {
                 res.json(pet);
@@ -52,6 +54,7 @@ module.exports = (api) =>{
         },
         list: (req, res, next) => {
             Pet.find(req.query)
+            .populate('abrigo')
             .populate('medicamentos')
             .populate('vacinacao')
             .populate('caracteristica')

@@ -7,21 +7,21 @@ module.exports = (api) => {
     const UsuarioSchema = new Schema({
         nome: {
             type: String,
-            required: true
+            required: [true, 'A propriedade "nome" é obrigatória!'],
         },
         email: {
             type: String,
             unique: true,
-            required: true
+            required: [true, 'A propriedade "email" é obrigatória!'],
         },
         username: {
             type: String,
             unique: true,
-            required: true
+            required: [true, 'A propriedade "username" é obrigatória!'],
         },
         password: {
             type: String,
-            required: true
+            required: [true, 'A propriedade "password" é obrigatória!'],
         }
     });
 

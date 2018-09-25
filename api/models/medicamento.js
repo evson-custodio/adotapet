@@ -7,22 +7,22 @@ module.exports = (api) => {
     const MedicamentoSchema = new Schema({
         usoContinuo: {
             type: Boolean,
-            required: true,
+            required: [true, 'A propriedade "usoContinuo" é obrigatória!'],
             unique: false
         },
         nome: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "nome" é obrigatória!'],
             unique: true
         },
         apresentacao: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "apresentacao" é obrigatória!'],
             unique: false
         },
         dosagem: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "dosagem" é obrigatória!'],
             unique: false
         }
     });

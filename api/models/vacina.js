@@ -7,12 +7,12 @@ module.exports = (api) => {
     const VacinaSchema = new Schema({
         nome: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "nome" é obrigatória!'],
             unique: false
         },
         descricao: {
             type: String,
-            required: true,
+            required: [true, 'A propriedade "descricao" é obrigatória!'],
             unique: false
         },
         data: {
@@ -22,7 +22,7 @@ module.exports = (api) => {
         },
         aplicada: {
             type: Boolean,
-            required: true,
+            required: [true, 'A propriedade "aplicada" é obrigatória!'],
             unique: false
         }
     });
