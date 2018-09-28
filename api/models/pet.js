@@ -33,7 +33,7 @@ module.exports = (api) => {
             unique: false
         },
         raca: {
-            type: String,
+            type: Boolean,
             required: [true, 'A propriedade "raca" é obrigatória!'],
             unique: false
         },
