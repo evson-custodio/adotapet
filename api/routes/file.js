@@ -6,13 +6,14 @@ module.exports = (api) => {
     router.param('name', FileController.handlerName);
 
     router.route('/')
-    .post(FileController.create);
+    .post(FileController.create)
+    .get(FileController.list);
 
-    router.route('/:id([a-f0-9]{12}|[a-f0-9]{24})')
+    router.route('/:id([a-f0-9]{24})')
     .get(FileController.getById)
     .delete(FileController.deleteById);
 
-    router.route('/:name([\\wáéíóúâêîôûãõàèìòùüç%_]+.(png|jpg))')
+    router.route('/:name([\\wáéíóúâêîôûãõàèìòùüç%_.]+.(png|jpg|jpeg))')
     .get(FileController.getByName)
     .delete(FileController.deleteByName);
 

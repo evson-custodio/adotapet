@@ -17,7 +17,7 @@ module.exports = (api) => {
         },
         read: (req, res, next) => {
             Abrigo.findOne({_id: req.id})
-            .populate('usuarios')
+            .populate('funcionarios')
             .populate('pets')
             .exec()
             .then(abrigo => {
@@ -50,9 +50,9 @@ module.exports = (api) => {
         list: (req, res, next) => {
             let keys = Object.keys(req.query);
             if (keys.length > 0) {
-                if (keys.includes('usuarios')) {
-                    req.query.usuarios = {
-                        $in: req.query.usuarios
+                if (keys.includes('funcionarios')) {
+                    req.query.funcionarios = {
+                        $in: req.query.funcionarios
                     }
                 }
                 if (keys.includes('pets')) {
@@ -62,7 +62,7 @@ module.exports = (api) => {
                 }
             }
             Abrigo.find(req.query)
-            .populate('usuarios')
+            .populate('funcionarios')
             .populate('pets')
             .exec()
             .then(abrigos => {

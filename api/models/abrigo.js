@@ -10,10 +10,10 @@ module.exports = (api) => {
             type: 'ObjectId',
             ref: 'File'
         },
-        usuarios: [
+        funcionarios: [
             {
                 type: 'ObjectId',
-                ref: 'Usuario'
+                ref: 'Funcionario'
             }
         ],
         pets: [
@@ -63,33 +63,8 @@ module.exports = (api) => {
             type: String
         },
         endereco: {
-            logradouro: {
-                type: String,
-                required: [true, 'A propriedade "endereco.logradouro" é obrigatória!']
-            },
-            numero: {
-                type: String,
-                default: 's/n'
-            },
-            bairro: {
-                type: String,
-                required: [true, 'A propriedade "endereco.bairro" é obrigatória!']
-            },
-            cidade: {
-                type: String,
-                required: [true, 'A propriedade "endereco.cidade" é obrigatória!']
-            },
-            uf: {
-                type: String,
-                required: [true, 'A propriedade "endereco.uf" é obrigatória!']
-            },
-            pais: {
-                type: String,
-                required: [true, 'A propriedade "endereco.pais" é obrigatória!']
-            },
-            complemento: {
-                type: String
-            }
+            type: 'ObjectId',
+            ref: 'Endereco'
         },
         responsavel: {
             nome: {
@@ -99,7 +74,6 @@ module.exports = (api) => {
             email: {
                 type: String,
                 required: [true, 'A propriedade "responsavel.email" é obrigatória!'],
-                unique: true,
                 validate: {
                     validator: (v) => validator.isEmail(v),
                     message: props => `${props.value} não é um "responsavel.email" valido!`
@@ -108,7 +82,6 @@ module.exports = (api) => {
             telefone: {
                 type: String,
                 required: [true, 'A propriedade "responsavel.telefone" é obrigatória!'],
-                unique: true,
                 validate: {
                     validator: (v) => {
                         return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);

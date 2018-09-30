@@ -1,4 +1,8 @@
+const debug = require('debug')('leva-eu:api:controllers:file');
+
 module.exports = (api) => {
+    // const FileSchema = require('mongoose').model('File');
+    const FileSchema = api.models.file;
     const ObjectId = api.mongoose.Mongoose.Types.ObjectId;
     const gfs = api.mongoose.gfs;
 
@@ -11,50 +15,61 @@ module.exports = (api) => {
             req.name = name;
             next();
         },
-        getById: (req, res) => {
-            console.log('getById!');
-            gfs.createReadStream({_id: req.id}).pipe(res)
-            .on('finish', () => {
-                console.log('Arquivo Enviado!');
-            });
-        },
-        getByName: (req, res) => {
-            console.log('getByName!');
-            gfs.createReadStream({filename: req.name}).pipe(res)
-            .on('finish', () => {
-                console.log('Arquivo Enviado!');
-            });
-        },
         create: (req, res) => {
-            console.log('create!');
             let ws = gfs.createWriteStream({
                 filename: req.headers.filename
             });
             req.pipe(ws);
             ws.on('close', file => {
+                debug('File created ' + file.filename + '!');
                 res.status(201).json(file);
             });
         },
+        getById: (req, res) => {
+            console.log('getById!');
+            gfs.createReadStream({_id: req.id}).pipe(res)
+            .on('finish', () => {
+                debug('File sent by id!');
+            });
+        },
+        getByName: (req, res) => {
+            gfs.createReadStream({filename: req.name}).pipe(res)
+            .on('finish', () => {
+                debug('File sent by name!');
+            });
+        },
         deleteById: (req, res) => {
-            console.log('deleteById!');
             gfs.remove({_id: req.id}, err => {
                 if (err) {
-                    res.json(err);
+                    res.status(400).json(err);
                 }
                 else {
+                    debug('File ' + file.filename + ' deleted by id!');
                     res.send('OK!');
                 }
             });
         },
         deleteByName: (req, res) => {
-            console.log('deleteByName!');
             gfs.remove({filename: req.name}, err => {
                 if (err) {
-                    res.json(err);
+                    res.status(400).json(err);
                 }
                 else {
+                    debug('File ' + file.filename + ' deleted by name!');
                     res.send('OK!');
                 }
+            });
+        },
+        list: (req, res) => {
+            FileSchema.find(req.query)
+            .exec()
+            .then(files => {
+                debug('Files: ');
+                debug(files);
+                res.json(files);
+            })
+            .catch(error => {
+                res.status(400).json(error);
             });
         }
     }

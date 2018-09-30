@@ -8,7 +8,7 @@ module.exports = (api) => {
     // const Schema = Mongoose.Schema;
     
     const PetSchema = new Schema({
-        foto: {
+        fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
         },                
