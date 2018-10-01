@@ -28,7 +28,7 @@ module.exports = {
         }
     },
     production: {
-        uri: 'mongodb://localhost:27017/leva-eu-prod',
+        use_env_variable: 'MONGODB_URI',
         options: {
             useNewUrlParser: true,
             // autoIndex: false, // Don't build indexes

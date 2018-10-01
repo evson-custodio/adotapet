@@ -1,10 +1,10 @@
 {
   "name": "leva-eu",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "API REST do Leva-Eu",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env DEBUG=leva-eu:* nodemon ./server.js",
+    "start": "nodemon ./server.js",
     "start:dev": "cross-env DEBUG=leva-eu:* NODE_ENV=development nodemon ./server.js",
     "start:test": "cross-env DEBUG=leva-eu:* NODE_ENV=test nodemon ./server.js",
     "start:testesintegracao": "mocha --opts testes/integração/config/mocha.opts testes/integração/*.js",
