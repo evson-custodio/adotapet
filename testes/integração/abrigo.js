@@ -2,24 +2,46 @@ let defaultAbrigo = {
     "fotoPerfil": "5b82fb5f624db51c0c1f6cf4",
     "nome": "Abrigo de Testes",
     "email": "testes@adotapet.com",
-    "telefone": "2733218600",
+    "telefone": "(27)9986-81478",
     "descricao": "Este é um abrigo criado pelo teste de integração.",
-    "cnpj": "17305639000188",
-    "endereco": {
-        "logradouro": "Rua Vasco Coutinho",
-        "numero": "878",
-        "bairro": "Praia de Itaparica",
-        "cidade": "Vila Velha",
-        "uf": "ES",
-        "pais": "Brasil",
-        "complemento": "Perto do Posto Ipiranga"
-    },
+    "cnpj": "43.165.473/0001-51",
     "responsavel": {
         "nome": "Will Smith",
         "email": "will@gmail.com",
-        "telefone": "27998681478"
-    }
+        "telefone": "(27)9986-81478"
+    },
+    "endereco" : null
 }
+
+let enderecoAbrigo = {
+    "logradouro": "Rua Vasco Coutinho",
+    "numero": "878",
+    "bairro": "Praia de Itaparica",
+    "cidade": "Vila Velha",
+    "uf": "ES",
+    "pais": "Brasil",
+    "complemento": "Perto do Posto Ipiranga",
+	"cep" : "29.931-730"
+}
+
+let ultimoEnderecoInseridoId;
+
+describe('Rota: Endereco', function() {
+    describe('POST /endereco', () => {
+        it('insere um endereco', done => {
+            request
+                .post('/api/endereco')               
+                .send(enderecoAbrigo)
+                .end((err, res) => {   
+                    a = res.body;           
+                    assert.isTrue(isSubset(a, enderecoAbrigo));     
+                    ultimoEnderecoInseridoId = a._id;      
+                    defaultAbrigo.endereco = ultimoEnderecoInseridoId;                                   
+                    done(err);
+                });
+        });
+    });    
+});
 
 describe('Rota: Abrigo', function() {
     describe('POST /abrigo', () => {
@@ -116,23 +138,8 @@ describe('Rota: Abrigo', function() {
                 .post('/api/abrigo')               
                 .send({})
                 .end((err, res) => {                                    
-                    erros = res.body.errors;
-                    
-                    //assert.equal(Object.keys(erros).length, 12); // Quantidade de campos obrigatórios
-
-                    assert.equal(erros["responsavel.telefone"].kind, "required"); 
-                    assert.equal(erros["responsavel.email"].kind, "required"); 
-                    assert.equal(erros["responsavel.nome"].kind, "required"); 
-                    
-                    assert.equal(erros["endereco.pais"].kind, "required"); 
-                    assert.equal(erros["endereco.uf"].kind, "required"); 
-                    assert.equal(erros["endereco.cidade"].kind, "required"); 
-                    assert.equal(erros["endereco.bairro"].kind, "required"); 
-                    assert.equal(erros["endereco.logradouro"].kind, "required"); 
-
-                    assert.equal(erros.telefone.kind, "required");                     
-                    assert.equal(erros.email.kind, "required"); 
-                    assert.equal(erros.nome.kind, "required");                     
+                    assert.equal(res.body._message, "Abrigo validation failed"); 
+                    assert.include(res.body.message, "é obrigatória!"); 
                     done(err);
                 });
         });
@@ -193,16 +200,5 @@ describe('Rota: Abrigo', function() {
                 });
         }); 
     });
-
-    /*describe('DELETE /abrigo/{id}', () => {
-        it('desativa um abrigo', done => {
-            request
-                .delete('/api/abrigo/' + ultimoAbrigoInseridoId)
-                .end((err, res) => {
-                    assert.equal(res.body.email, defaultAbrigo.email); 
-                    done(err);
-                });
-        });
-    });*/
 
 });

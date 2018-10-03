@@ -1,12 +1,11 @@
-let defaultPet = {
-    "foto": "5b82fb5f624db51c0c1f6cf4",
+let defaultPet = {    
     "nome": "Biscoito",
     "idade": "6",
     "especie": "Cachorro",
-    "raca": "Doberman",
+    "raca": false,
     "pelagem": "Escura",
     "peso": "15",
-    "porte": "Médio",
+    "porte": "médio",
     "sexo": true,
     "castrado": false,
     "medicamentoEspecifico": true,
@@ -16,7 +15,7 @@ let defaultPet = {
     "alimentacoes" : ["Cucuz (Somente após a janta)"],
     "medicamentos" : [],
     "vacinacao" : [],
-    "abrigo" : null,
+    "abrigo" : null
 }
 
 let defaultMedicamento = {
@@ -45,7 +44,7 @@ describe('Rota: Medicamento', function() {
                 .send(defaultMedicamento)
                 .end((err, res) => {   
                     a = res.body;           
-                    assert.isTrue(isSubset(a, defaultMedicamento));     
+                    assert.isTrue(isSubset(a, defaultMedicamento));
                     ultimoMedicamentoInseridoId = a._id;      
                     defaultPet.medicamentos.push(ultimoMedicamentoInseridoId);                                   
                     done(err);
@@ -59,14 +58,8 @@ describe('Rota: Medicamento', function() {
                 .post('/api/medicamento')               
                 .send({})
                 .end((err, res) => {                                    
-                    erros = res.body.errors;
-                    
-                    assert.isAbove(res.body.message.length, 0);
-
-                    assert.equal(erros.dosagem.kind, "required"); 
-                    assert.equal(erros.apresentacao.kind, "required"); 
-                    assert.equal(erros.nome.kind, "required"); 
-                    assert.equal(erros.usoContinuo.kind, "required"); 
+                    assert.equal(res.body._message, "Medicamento validation failed"); 
+                    assert.include(res.body.message, "é obrigatória!"); 
                     done(err);
                 });
         });
@@ -110,13 +103,8 @@ describe('Rota: Vacina', function() {
                 .post('/api/vacina')               
                 .send({})
                 .end((err, res) => {                                    
-                    erros = res.body.errors;
-                    
-                    assert.isAbove(res.body.message.length, 0);
-
-                    assert.equal(erros.aplicada.kind, "required"); 
-                    assert.equal(erros.descricao.kind, "required"); 
-                    assert.equal(erros.nome.kind, "required"); 
+                    assert.equal(res.body._message, "Vacina validation failed"); 
+                    assert.include(res.body.message, "é obrigatória!");
                     done(err);
                 });
         });
@@ -134,7 +122,7 @@ describe('Rota: Pet', function() {
                 .send(defaultPet)
                 .end((err, res) => {   
                     a = res.body;                    
-                    assert.isTrue(isSubset(a, defaultPet));   
+                    assert.isTrue(isSubset(a, defaultPet));  //isSubset não ingnora case-sensitive  
                     ultimoPetInseridoId = a._id;                
                     done(err);
                 });
@@ -217,28 +205,10 @@ describe('Rota: Pet', function() {
         it('retorna mensagem de erro caso houver campo obrigatório não preenchido', done => {
             request
                 .post('/api/pet')               
-                .send({})
+                .send({porte : "médio"})
                 .end((err, res) => {                                    
-                    erros = res.body.errors;                
-
-                    assert.isAbove(res.body.message.length, 0);
-
-                    assert.equal(erros.disponivelAdocao.kind, "required"); 
-                    assert.equal(erros.alimentacaoEspecifica.kind, "required"); 
-                    assert.equal(erros.medicamentoEspecifico.kind, "required"); 
-                    
-                    assert.equal(erros.castrado.kind, "required"); 
-                    assert.equal(erros.sexo.kind, "required"); 
-                    assert.equal(erros.porte.kind, "required"); 
-                    assert.equal(erros.peso.kind, "required"); 
-
-                    assert.equal(erros.pelagem.kind, "required"); 
-                    assert.equal(erros.raca.kind, "required"); 
-                    assert.equal(erros.especie.kind, "required"); 
-
-                    assert.equal(erros.idade.kind, "required");                     
-                    assert.equal(erros.nome.kind, "required");                     
-                    assert.equal(erros.abrigo.kind, "required");                     
+                    assert.equal(res.body._message, "Pet validation failed"); 
+                    assert.include(res.body.message, "é obrigatória!");             
                     done(err);
                 });
         });
