@@ -1,18 +1,18 @@
 {
-  "name": "leva-eu",
+  "name": "adotapet",
   "version": "1.0.6",
-  "description": "API REST do Leva-Eu",
+  "description": "API REST do adotapet",
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js",
-    "start:dev": "cross-env DEBUG=leva-eu:* NODE_ENV=development nodemon ./server.js",
-    "start:test": "cross-env DEBUG=leva-eu:* NODE_ENV=test nodemon ./server.js",
+    "start:dev": "cross-env DEBUG=adotapet:* NODE_ENV=development nodemon ./server.js",
+    "start:test": "cross-env DEBUG=adotapet:* NODE_ENV=test nodemon ./server.js",
     "start:testesintegracao": "mocha --opts testes/integração/config/mocha.opts testes/integração/*.js",
-    "start:prod": "cross-env DEBUG=leva-eu:* NODE_ENV=production nodemon ./server.js"
+    "start:prod": "cross-env DEBUG=adotapet:* NODE_ENV=production nodemon ./server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evsoncustodio/leva-eu.git"
+    "url": "git+https://github.com/evsoncustodio/adotapet.git"
   },
   "keywords": [
     "Node",
@@ -23,9 +23,9 @@
   "author": "evsoncustodio",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/evsoncustodio/leva-eu/issues"
+    "url": "https://github.com/evsoncustodio/adotapet/issues"
   },
-  "homepage": "https://github.com/evsoncustodio/leva-eu#readme",
+  "homepage": "https://github.com/evsoncustodio/adotapet#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "consign": "^0.1.6",

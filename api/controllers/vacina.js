@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:vacina');
+const debug = require('debug')('adotapet:api:controllers:vacina');
 
 module.exports = (api) => {
     const Vacina = api.models.vacina;

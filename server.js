@@ -1,5 +1,5 @@
 const http = require('http');
-const debug = require('debug')('leva-eu:server');
+const debug = require('debug')('adotapet:server');
 const port = process.env.PORT || '1337';
 const env = require('./config/env')[process.env.NODE_ENV || 'development'];
 

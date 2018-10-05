@@ -1,6 +1,6 @@
 module.exports = {
     development: {
-        uri: 'mongodb://localhost:27017/leva-eu-dev',
+        uri: 'mongodb://localhost:27017/adotapet-dev',
         options: {
             useNewUrlParser: true,
             reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
@@ -14,7 +14,7 @@ module.exports = {
         }
     },
     test: {
-        uri: 'mongodb://localhost:27017/leva-eu-test',
+        uri: 'mongodb://localhost:27017/adotapet-test',
         options: {
             useNewUrlParser: true,
             reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect

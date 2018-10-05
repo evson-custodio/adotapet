@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:caracteristica');
+const debug = require('debug')('adotapet:api:controllers:caracteristica');
 
 module.exports = (api) => {
     const Caracteristica = api.models.caracteristica;

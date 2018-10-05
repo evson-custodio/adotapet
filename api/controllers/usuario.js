@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:usuario');
+const debug = require('debug')('adotapet:api:controllers:usuario');
 
 module.exports = (api) => {
     const Usuario = api.models.usuario;

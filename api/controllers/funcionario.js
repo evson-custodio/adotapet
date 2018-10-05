@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:funcionario');
+const debug = require('debug')('adotapet:api:controllers:funcionario');
 
 module.exports = (api) => {
     const Funcionario = api.models.funcionario;

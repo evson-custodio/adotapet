@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:file');
+const debug = require('debug')('adotapet:api:controllers:file');
 
 module.exports = (api) => {
     // const FileSchema = require('mongoose').model('File');

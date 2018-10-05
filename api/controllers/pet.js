@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:pet');
+const debug = require('debug')('adotapet:api:controllers:pet');
 
 module.exports = (api) =>{
     const Pet = api.models.pet;

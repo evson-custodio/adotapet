@@ -1,4 +1,4 @@
-const debug = require('debug')('leva-eu:api:controllers:endereco');
+const debug = require('debug')('adotapet:api:controllers:endereco');
 
 module.exports = (api) => {
     const Endereco = api.models.endereco;
