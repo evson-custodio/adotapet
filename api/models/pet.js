@@ -30,7 +30,7 @@ module.exports = (api) => {
             required: [true, 'A propriedade "especie" é obrigatória!']
         },
         raca: {
-            type: Boolean,
+            type: String,
             required: [true, 'A propriedade "raca" é obrigatória!']
         },
         pelagem: {
@@ -48,7 +48,7 @@ module.exports = (api) => {
             required: [true, 'A propriedade "porte" é obrigatória!'],
             validate: {
                 validator: (v) => {
-                    return /pequeno|médio|grande/.test(v);
+                    return /Mini|Pequeno|Médio|Grande|Gigante/.test(v);
                 },
                 message: props => `${props.value} não é um "porte" valido!`
             }
