@@ -10,8 +10,6 @@ module.exports = (api) =>{
             next();
         },
         create: (req, res, next) => {
-            req.body.porte = req.body.porte.trim();
-            req.body.porte = req.body.porte.toLocaleLowerCase();
             Pet.create(req.body)
             .then(pet => {
                 Abrigo.findOne({_id: pet.abrigo})
