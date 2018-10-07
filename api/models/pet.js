@@ -44,7 +44,6 @@ module.exports = (api) => {
         porte: {
             type: String,
             trim: true,
-            lowercase: true,
             required: [true, 'A propriedade "porte" é obrigatória!'],
             validate: {
                 validator: (v) => {
