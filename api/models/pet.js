@@ -19,40 +19,33 @@ module.exports = (api) => {
         },
         nome: {
             type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "nome" é obrigatória!']
         },
         idade: {
             type: String,
-            required: [true, 'A propriedade "idade" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "idade" é obrigatória!']
         },
         especie: {
             type: String,
-            required: [true, 'A propriedade "especie" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "especie" é obrigatória!']
         },
         raca: {
             type: Boolean,
-            required: [true, 'A propriedade "raca" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "raca" é obrigatória!']
         },
         pelagem: {
             type: String,
-            required: [true, 'A propriedade "pelagem" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "pelagem" é obrigatória!']
         },
         peso: {
             type: String,
-            required: [true, 'A propriedade "peso" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "peso" é obrigatória!']
         },
         porte: {
             type: String,
-            required: [true, 'A propriedade "porte" é obrigatória!'],
-            unique: false,
-            lowercase: true,
             trim: true,
+            lowercase: true,
+            required: [true, 'A propriedade "porte" é obrigatória!'],
             validate: {
                 validator: (v) => {
                     return /pequeno|médio|grande/.test(v);
@@ -62,23 +55,19 @@ module.exports = (api) => {
         },
         historia: {
             type: String,
-            required: false,
-            unique: false
+            required: false
         },
         sexo: {
             type: Boolean,
-            required: [true, 'A propriedade "sexo" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "sexo" é obrigatória!']
         },
         castrado: {
             type: Boolean,
-            required: [true, 'A propriedade "castrado" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "castrado" é obrigatória!']
         },
         medicamentoEspecifico: {
             type: Boolean,
-            required: [true, 'A propriedade "medicamentoEspecifico" é obrigatória!'],
-            unique: false   
+            required: [true, 'A propriedade "medicamentoEspecifico" é obrigatória!']
         },
         medicamentos: [
             {
@@ -88,24 +77,20 @@ module.exports = (api) => {
         ],        
         alimentacaoEspecifica: {
             type: Boolean,
-            required: [true, 'A propriedade "alimentacaoEspecifica" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "alimentacaoEspecifica" é obrigatória!']
         },
         alimentacoes: [
             {
                 type: String,
-                unique: false
             }
         ],
         disponivelAdocao: {
             type: Boolean,
-            required: [true, 'A propriedade "disponivelAdocao" é obrigatória!'],
-            unique: false
+            required: [true, 'A propriedade "disponivelAdocao" é obrigatória!']
         },
         deficienciaDoenca: {
             type: String,
             required: false,
-            unique: false
         },
         vacinacao: [
             {
