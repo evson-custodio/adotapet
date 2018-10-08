@@ -2,10 +2,10 @@ let defaultPet = {
     "nome": "Biscoito",
     "idade": "6",
     "especie": "Cachorro",
-    "raca": false,
+    "raca": "doberman",
     "pelagem": "Escura",
     "peso": "15",
-    "porte": "médio",
+    "porte": "Médio",
     "sexo": true,
     "castrado": false,
     "medicamentoEspecifico": true,
@@ -46,7 +46,7 @@ describe('Rota: Medicamento', function() {
                     a = res.body;           
                     assert.isTrue(isSubset(a, defaultMedicamento));
                     ultimoMedicamentoInseridoId = a._id;      
-                    defaultPet.medicamentos.push(ultimoMedicamentoInseridoId);                                   
+                    defaultPet.medicamentos.push(ultimoMedicamentoInseridoId);             
                     done(err);
                 });
         });
@@ -195,7 +195,7 @@ describe('Rota: Pet', function() {
                 .put('/api/pet/' + ultimoPetInseridoId)               
                 .send(pet)
                 .end((err, res) => {                 
-                    assert.notEqual(res.body.porte, pet.porte);     
+                    assert.equal(res.body.errors.porte.name, "ValidatorError"); 
                     done(err);
                 });
         });

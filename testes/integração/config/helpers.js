@@ -9,3 +9,4 @@ global.request = supertest("http://localhost:1337");
 global.isSubset = require("is-subset");
 
 global.ultimoAbrigoInseridoId;
+global.ultimoUsuarioInseridoId;

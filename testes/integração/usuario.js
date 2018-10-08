@@ -5,15 +5,13 @@ let defaultUsuario = {
     "password": "123456"
 }
 
-let ultimoUsuarioInseridoId;
-
 describe('Rota: Usuario', function() {    
     describe('POST /usuario', () => {
         it('insere um usuario', done => {
             request
                 .post('/api/usuario')               
                 .send(defaultUsuario)
-                .end((err, res) => {                                    
+                .end((err, res) => {                
                     let u = res.body;
                     assert.equal(u.nome, defaultUsuario.nome);                                         
                     assert.equal(u.email, defaultUsuario.email);                                         
