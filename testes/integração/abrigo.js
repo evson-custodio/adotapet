@@ -191,11 +191,10 @@ describe('Rota: Abrigo', function() {
     describe('GET /abrigo', () => {
         it('retorna a busca de um abrigo dado seu nome', done => {
             request
-                .get('/api/abrigo/')
+                .get('/api/abrigo?nome=' + defaultAbrigo.nome)
                 .end(function(err, res){
                     let abrigos = res.body;                    
-                    let abrigoRecuperado = abrigos.filter(a => a._id == ultimoAbrigoInseridoId);
-                    assert.equal(abrigoRecuperado[0].nome, defaultAbrigo.nome);                  
+                    assert.equal(abrigos[0].nome, defaultAbrigo.nome);                  
                     done(err);
                 });
         }); 

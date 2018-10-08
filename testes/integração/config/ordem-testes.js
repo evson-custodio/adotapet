@@ -1,4 +1,4 @@
 require('../usuario.js');
-require('../abrigo.js');
 require('../funcionario.js');
+require('../abrigo.js');
 require('../pet.js');

@@ -213,6 +213,18 @@ describe('Rota: Pet', function() {
                 });
         });
     });
+
+    describe('GET /abrigo', () => {
+        it('retorna a busca de um pet dado seu nome', done => {
+            request
+                .get('/api/pet?nome=' + defaultPet.nome)
+                .end(function(err, res){
+                    let pets = res.body;                    
+                    assert.equal(pets[0].nome, defaultPet.nome);                  
+                    done(err);
+                });
+        }); 
+    });
     
     describe('Deleta um medicamento vinculado ao pet', function() {        
         describe('PUT /pet/{id}', () => {
