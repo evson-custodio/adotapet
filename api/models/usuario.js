@@ -1,36 +1,43 @@
 const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    // const Mongoose = api.mongoose.Mongoose;
+    // const Schema = api.mongoose.Mongoose.Schema;
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
 
-    const UsuarioSchema = new Schema({
-        nome: {
-            type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!']
-        },
+    const schema = new Schema({
         email: {
             type: String,
-            unique: true,
-            required: [true, 'A propriedade "email" é obrigatória!'],
-            validate: {
-                validator: (v) => validator.isEmail(v),
-                message: props => `${props.value} não é um "email" valido!`
-            }
+            trim: true,
+            maxlength: 64,
+            required: true,
+            validate: validator.validate.isEmail,
+            unique: true
         },
         username: {
             type: String,
-            unique: true,
-            required: [true, 'A propriedade "username" é obrigatória!']
+            trim: true,
+            minlength: 4,
+            maxlength: 24,
+            required: true,
+            validate: validator.validate.isUsername,
+            unique: true
         },
         password: {
             type: String,
-            required: [true, 'A propriedade "password" é obrigatória!']
+            trim: true,
+            minlength: 8,
+            maxlength: 16,
+            required: true,
+            validate: validator.validate.isPassword
         }
     });
 
-    UsuarioSchema.plugin(uniqueValidator);
+    schema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Usuario', UsuarioSchema);
+    return Mongoose.model('Usuario', schema);
 }
