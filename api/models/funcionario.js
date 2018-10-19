@@ -1,22 +1,44 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    //const Mongoose = api.mongoose.Mongoose;
+    //const Schema = api.mongoose.Mongoose.Schema;
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
 
-    const FuncionarioSchema = new Schema({
+    const schema = new Schema({
+        fotoPerfil: {
+            type: 'ObjectId',
+            ref: 'File'
+        },
+        abrigo: {
+            type: 'ObjectId',
+            ref: 'Abrigo'
+        },
         usuario: {
             type: 'ObjectId',
             ref: 'Usuario'
         },
+        endereco: {
+            type: 'ObjectId',
+            ref: 'Endereco'
+        },
         nome: {
             type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!']
+            trim: true,
+            maxlenght: 64,
+            required: true
+        },
+        telefone: {
+            type: String,
+            trim: true,
+            required: true,
+            validate: validator.validate.isTelefone
         }
     });
 
-    FuncionarioSchema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Funcionario', FuncionarioSchema);
+    return Mongoose.model('Funcionario', schema);
 }

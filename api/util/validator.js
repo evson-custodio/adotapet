@@ -56,6 +56,12 @@ module.exports = new function() {
             + this.caracteres.point + '['
             + this.caracteres.digits + ']{3}-['
             + this.caracteres.digits + ']{3}'
+        , 'g'),
+        telefone: new RegExp('^['
+            + this.caracteres.digits + ']{2}['
+            + this.caracteres.digits + ']?['
+            + this.caracteres.digits + ']{4}-['
+            + this.caracteres.digits + ']{4}'
         , 'g')
     },
     this.validate = {
@@ -80,6 +86,10 @@ module.exports = new function() {
         },
         isCEP: {
             validator: value => value === 'Não Informado' || this.regex.cep.test(value),
+            message: this.message.notValid
+        },
+        isTelefone: {
+            validator: this.regex.telefone.test(value),
             message: this.message.notValid
         }
     }
