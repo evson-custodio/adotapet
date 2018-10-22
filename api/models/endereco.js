@@ -2,8 +2,6 @@ const messageValidator = require('./../plugins/messageValidator');
 const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    // const Mongoose = api.mongoose.Mongoose;
-    // const Schema = api.mongoose.Mongoose.Schema;
     const Mongoose = require('mongoose');
     const Schema = Mongoose.Schema;
 

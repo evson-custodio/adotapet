@@ -1,125 +1,145 @@
 const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
-module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    // const Mongoose = require('mongoose');
-    const Schema = api.mongoose.Mongoose.Schema;
-    // const Schema = Mongoose.Schema;
+module.exports = (api) => {    
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
     
     const PetSchema = new Schema({
         fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
-        },                
-        abrigo: {
-            type: 'ObjectId',
-            ref: 'Abrigo',
-            required: [true, 'A propriedade "abrigo" é obrigatória!']
-        },
+        },   
+        vacinacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Vacina'
+            }
+        ],         
+        medicamentosEspecificos: [
+            {
+                type: 'ObjectId',
+                ref: 'Medicamento'
+            }
+        ],
+        alimentacoesEspecificas: [
+            {
+                type: String,
+                unique: false,
+                required: false
+            }
+        ],
+        deficienciasOuDoencas: [
+            {
+                type: String,
+                unique: false,
+                required: false
+            }
+        ],
         nome: {
             type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!'],
+            maxlenght: 16,
+            required: true,
             unique: false
         },
-        idade: {
-            type: String,
-            required: [true, 'A propriedade "idade" é obrigatória!'],
+        dataNascimento: {
+            type: Date,
+            required: true,
             unique: false
         },
         especie: {
             type: String,
-            required: [true, 'A propriedade "especie" é obrigatória!'],
+            required: true,
             unique: false
         },
         raca: {
-            type: Boolean,
-            required: [true, 'A propriedade "raca" é obrigatória!'],
+            type: String,
+            required: true,
             unique: false
         },
         pelagem: {
             type: String,
-            required: [true, 'A propriedade "pelagem" é obrigatória!'],
+            required: true,
             unique: false
         },
         peso: {
-            type: String,
-            required: [true, 'A propriedade "peso" é obrigatória!'],
+            type: Number,
+            required: true,
             unique: false
         },
         porte: {
             type: String,
-            required: [true, 'A propriedade "porte" é obrigatória!'],
-            unique: false,
-            lowercase: true,
-            trim: true,
-            validate: {
-                validator: (v) => {
-                    return /pequeno|médio|grande/.test(v);
-                },
-                message: props => `${props.value} não é um "porte" valido!`
-            }
+            required: true,
+            unique: false
         },
         historia: {
             type: String,
+            maxlenght: 512,
             required: false,
             unique: false
         },
         sexo: {
             type: Boolean,
-            required: [true, 'A propriedade "sexo" é obrigatória!'],
+            required: true,
             unique: false
         },
         castrado: {
             type: Boolean,
-            required: [true, 'A propriedade "castrado" é obrigatória!'],
+            required: true,
             unique: false
         },
-        medicamentoEspecifico: {
-            type: Boolean,
-            required: [true, 'A propriedade "medicamentoEspecifico" é obrigatória!'],
-            unique: false   
-        },
-        medicamentos: [
-            {
-                type: 'ObjectId',
-                ref: 'Medicamento'
-            }
-        ],        
-        alimentacaoEspecifica: {
-            type: Boolean,
-            required: [true, 'A propriedade "alimentacaoEspecifica" é obrigatória!'],
+        estado: {
+            type: String,
+            required: true,
             unique: false
         },
-        alimentacoes: [
-            {
-                type: String,
+        caracteristicas: {
+            grauBrincalhao: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauEnergia: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauAmizadeComAnimais: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauAmizadoComCriancas: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauAmizadeComDesconhecidos: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauProtecao: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauAgressividade: {
+                type: Number,
+                required: true,
+                unique: false
+            },
+            grauFobiaAoRuido: {
+                type: Number,
+                required: true,
                 unique: false
             }
-        ],
-        disponivelAdocao: {
-            type: Boolean,
-            required: [true, 'A propriedade "disponivelAdocao" é obrigatória!'],
-            unique: false
-        },
-        deficienciaDoenca: {
-            type: String,
-            required: false,
-            unique: false
-        },
-        vacinacao: [
-            {
-                type: 'ObjectId',
-                ref: 'Vacina'
-            }
-        ],
-        caracteristica: {
-            type: 'ObjectId',
-            ref: 'Caracteristica'
         }
     });
 
-    PetSchema.plugin(uniqueValidator);
+    schema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Pet', PetSchema);
+    return Mongoose.model('Pet', schema);
 }

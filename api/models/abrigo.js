@@ -1,11 +1,11 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
 
-    const AbrigoSchema = new Schema({
+    const schema = new Schema({
         fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
@@ -24,43 +24,33 @@ module.exports = (api) => {
         ],
         nome: {
             type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!'],
+            required: true,
+            maxlenght: 16,
             unique: true
         },
         email: {
             type: String,
-            required: [true, 'A propriedade "email" é obrigatória!'],
+            required: true,
+            maxlenght: 64,
             unique: true,
-            validate: {
-                validator: (v) => validator.isEmail(v),
-                message: props => `${props.value} não é um "email" valido!`
-            }
+            validate: validator.validate.isEmail
         },
         telefone: {
             type: String,
-            required: [true, 'A propriedade "telefone" é obrigatória!'],
+            required: true, 
             unique: true,
-            validate: {
-                validator: (v) => {
-                    return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
-                },
-                message: props => `${props.value} não é um "telefone" valido!`
-            }
+            validate: validator.validate.isTelefone
         },
         cnpj: {
             type: String,
-            required: [true, 'A propriedade "cnpj" é obrigatória!'],
-            unique: true,
-            // xx.xxx.xxx/xxxx-xx
-            validate: {
-                validator: (v) => {
-                    return /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.test(v);
-                },
-                message: props => `${props.value} não é um "cnpj" valido!`
-            }
+            required: true, 
+            unique: true
         },
-        descricao: {
-            type: String
+        historia: {
+            type: String,
+            required: false,
+            maxlenght: 512,
+            unique: false
         },
         endereco: {
             type: 'ObjectId',
@@ -69,30 +59,28 @@ module.exports = (api) => {
         responsavel: {
             nome: {
                 type: String,
-                required: [true, 'A propriedade "responsavel.nome" é obrigatória!'],
+                required: true,
+                unique: false,
+                maxlenght: 64
             },
             email: {
                 type: String,
-                required: [true, 'A propriedade "responsavel.email" é obrigatória!'],
-                validate: {
-                    validator: (v) => validator.isEmail(v),
-                    message: props => `${props.value} não é um "responsavel.email" valido!`
-                }
+                required: true,
+                maxlenght: 64,
+                unique: false,
+                validate: validator.validate.isEmail
             },
             telefone: {
                 type: String,
-                required: [true, 'A propriedade "responsavel.telefone" é obrigatória!'],
-                validate: {
-                    validator: (v) => {
-                        return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
-                    },
-                    message: props => `${props.value} não é um "responsavel.telefone" valido!`
-                }
+                required: true,
+                unique: false,                
+                validate: validator.validate.isTelefone
             }
         }
     });
 
-    AbrigoSchema.plugin(uniqueValidator);
+    schema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Abrigo', AbrigoSchema);
+    return Mongoose.model('Abrigo', schema);
 }

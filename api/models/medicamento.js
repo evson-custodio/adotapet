@@ -1,34 +1,39 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
 
-    const MedicamentoSchema = new Schema({
+    const schema = new Schema({
         usoContinuo: {
             type: Boolean,
-            required: [true, 'A propriedade "usoContinuo" é obrigatória!'],
+            required: true,
             unique: false
         },
         nome: {
             type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!'],
-            unique: true
+            trim: true,
+            maxlenght: 64,
+            required: true,
+            unique: false,            
         },
         apresentacao: {
             type: String,
-            required: [true, 'A propriedade "apresentacao" é obrigatória!'],
+            trim: true,
+            required: true, 
             unique: false
         },
         dosagem: {
             type: String,
-            required: [true, 'A propriedade "dosagem" é obrigatória!'],
+            trim: true,
+            maxlenght: 64,
+            required: true,
             unique: false
         }
     });
 
-    MedicamentoSchema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Medicamento', MedicamentoSchema);
+    return Mongoose.model('Medicamento', schema);
 }

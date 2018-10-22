@@ -1,24 +1,54 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
+const messageValidator = require('./../plugins/messageValidator');
+const validator = require('./../util/validator');
 
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    const Mongoose = require('mongoose');
+    const Schema = Mongoose.Schema;
 
-    const CaracteristicaSchema = new Schema({
-        pergunta: {
-            type: String,
-            required: [true, 'A propriedade "pergunta" é obrigatória!'],
+    const schema = new Schema({
+        grauBrincalhao: {
+            type: Number,
+            required: true,
             unique: false
         },
-        resposta: {
-            type: String,
-            required: [true, 'A propriedade "resposta" é obrigatória!'],
+        grauEnergia: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauAmizadeComAnimais: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauAmizadoComCriancas: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauAmizadeComDesconhecidos: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauProtecao: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauAgressividade: {
+            type: Number,
+            required: true,
+            unique: false
+        },
+        grauFobiaAoRuido: {
+            type: Number,
+            required: true,
             unique: false
         }
     });
 
-    // CaracteristicaSchema.plugin(uniqueValidator);
+    schema.plugin(messageValidator);
 
-    return Mongoose.model('Caracteristica', CaracteristicaSchema);
+    return Mongoose.model('Caracteristica', schema);
 }
