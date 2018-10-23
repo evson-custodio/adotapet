@@ -27,10 +27,19 @@ module.exports.init = (api, port) => {
 }
 
 module.exports.loadRoutes = (app, api) => {
+    let Generic = api.util.generic;
+    let routesNames = Object.keys(api.routes);
+    let modelsNames = Object.keys(api.models);
+
     app.use(cors());
 
-    Object.keys(api.routes).forEach(routeName => {
+    routesNames.forEach(routeName => {
         app.use('/api/' + routeName, api.routes[routeName]);
+    });
+
+    modelsNames.filter(modelName => !routesNames.includes(modelName))
+    .forEach(modelName => {
+        app.use('/api/' + modelName, Generic.getRouter(api, modelName));
     });
 
     if (app.get('env') === 'development') {

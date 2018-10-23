@@ -89,7 +89,7 @@ module.exports = new function() {
             message: this.message.notValid
         },
         isTelefone: {
-            validator: this.regex.telefone.test(value),
+            validator: value => this.regex.telefone.test(value),
             message: this.message.notValid
         }
     }

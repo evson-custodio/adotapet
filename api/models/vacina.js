@@ -1,3 +1,4 @@
+const uniqueValidator = require('mongoose-unique-validator');
 const messageValidator = require('./../plugins/messageValidator');
 const validator = require('./../util/validator');
 
