@@ -1,14 +1,14 @@
 const debug = require('debug')('adotapet:api:controllers:file');
 
 module.exports = (api) => {
-    // const FileSchema = require('mongoose').model('File');
-    const FileModel = api.models.file;
-    const ObjectId = api.mongoose.Mongoose.Types.ObjectId;
     const gfs = api.mongoose.gfs;
+    const FileSchema = api.models.file;
+    const ObjectId = api.mongoose.Types.ObjectId;
 
     return {
         _id: (req, res, next, _id) => {
-            req._id = new ObjectId(_id);
+            req._id = _id;
+            // req._id = new ObjectId(_id);
             next();
         },
         create: (req, res) => {
@@ -17,29 +17,44 @@ module.exports = (api) => {
             });
             req.pipe(ws);
             ws.on('close', file => {
-                debug('File created ' + file.filename + '!');
+                debug('File ' + file.filename + ' created!');
                 res.status(201).json(file);
             });
         },
         read: (req, res) => {
-            gfs.createReadStream({_id: req._id}).pipe(res)
-            .on('finish', () => {
-                debug('File sent by id!');
+            FileSchema.findOne({_id: req._id})
+            .exec()
+            .then(file => {
+                // gfs.exist({_id: req._id})
+                gfs.createReadStream({_id: req._id}).pipe(res)
+                .on('finish', () => {
+                    debug('File ' + file._id + ' sent by id!');
+                });
+            })
+            .catch(error => {
+                res.status(404).json(error);
             });
         },
         delete: (req, res) => {
-            gfs.remove({_id: req._id}, err => {
-                if (err) {
-                    res.status(400).json(err);
-                }
-                else {
-                    debug('File ' + file.filename + ' deleted by id!');
-                    res.status(200).send('OK!');
-                }
+            FileSchema.findOne({_id: req._id})
+            .exec()
+            .then(file => {
+                gfs.remove({_id: req._id}, error => {
+                    if (error) {
+                        res.status(400).json(error);
+                    }
+                    else {
+                        debug('File ' + file._id + ' deleted by id!');
+                        res.status(200).json(file);
+                    }
+                });
+            })
+            .catch(error => {
+                res.status(404).json(error);
             });
         },
         list: (req, res) => {
-            FileModel.find(req.query)
+            FileSchema.find(req.query)
             .exec()
             .then(files => {
                 debug('Files: ');

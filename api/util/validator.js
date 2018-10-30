@@ -1,6 +1,6 @@
 const validator = require('validator');
 
-module.exports = new function() {
+function Validator() {
     this.caracteres = {
         space: ' ',
         point: '.',
@@ -13,20 +13,20 @@ module.exports = new function() {
         uppercaseAccented: 'ÁÉÍÓÚÂÊÎÔÛÀÈÌÒÙÄËÏÖÜÃÕ'
     },
     this.message = {
-        notValid: prop => `O valor "${prop.value}" não é um "${prop.path}" válido!`
+        notValid: prop => `O valor '${prop.value}' não é um '${prop.path}' válido!`
     },
     this.regex = {
         lowercase: new RegExp('['
             + this.caracteres.lowercase + ''
             + this.caracteres.lowercaseAccented +
-        ']+', 'g'),
+        ']+'),
         uppercase: new RegExp('['
             + this.caracteres.uppercase + ''
             + this.caracteres.uppercaseAccented +
-        ']+', 'g'),
+        ']+'),
         digits: new RegExp('['
             + this.caracteres.digits + 
-        ']+', 'g'),
+        ']+'),
         username: new RegExp('^['
             + this.caracteres.lowercase + ''
             + this.caracteres.lowercaseAccented + ''
@@ -40,7 +40,7 @@ module.exports = new function() {
             + this.caracteres.digits + ''
             + this.caracteres.underscore + ''
             + this.caracteres.point +
-        ']*$', 'g'),
+        ']*$'),
         password: new RegExp('^['
             + this.caracteres.lowercase + ''
             + this.caracteres.lowercaseAccented + ''
@@ -50,19 +50,19 @@ module.exports = new function() {
             + this.caracteres.symbols + ''
             + this.caracteres.underscore + ''
             + this.caracteres.point +
-        ']*$', 'g'),
+        ']*$'),
         cep: new RegExp('^['
             + this.caracteres.digits + ']{2}\\'
             + this.caracteres.point + '['
             + this.caracteres.digits + ']{3}-['
             + this.caracteres.digits + ']{3}'
-        , 'g'),
+        ),
         telefone: new RegExp('^['
             + this.caracteres.digits + ']{2}['
             + this.caracteres.digits + ']?['
             + this.caracteres.digits + ']{4}-['
-            + this.caracteres.digits + ']{4}'
-        , 'g')
+            + this.caracteres.digits + ']{4}$'
+        )
     },
     this.validate = {
         isEmail: {
@@ -94,3 +94,5 @@ module.exports = new function() {
         }
     }
 }
+
+module.exports = new Validator;

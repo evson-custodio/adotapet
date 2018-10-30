@@ -1,3 +1,5 @@
-module.exports = new function() {
+function Message() {
     
 }
+
+module.exports = new Message;

@@ -65,9 +65,18 @@ function Generic() {
                 });
             },
             list: (req, res, next) => {
-                debug(Model.schema);
-                Model.find(req.query)
-                .exec()
+                let queryable = Model.schema.queryable;
+                queryable.forEach(path => {
+                    if (req.query[path]) {
+                        req.query[path] = {
+                            $in: req.query[path]
+                        }
+                    }
+                });
+
+                let query = Model.find(req.query);
+                Model.schema.populable.forEach(path => query.populate(path));
+                query.exec()
                 .then(docs => {
                     res.status(200).json(docs);
                 })

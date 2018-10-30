@@ -1,10 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const messageValidator = require('./../plugins/messageValidator');
-const validator = require('./../util/validator');
-
-module.exports = (api) => {    
-    const Mongoose = require('mongoose');
-    const Schema = Mongoose.Schema;
+module.exports = (api) => {
+    const Validator = api.util.validator;
+    
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
     
     const schema = new Schema({
         fotoPerfil: {
@@ -138,8 +136,5 @@ module.exports = (api) => {
         }
     });
 
-    schema.plugin(uniqueValidator);
-    schema.plugin(messageValidator);
-
-    return Mongoose.model('Pet', schema);
+    return mongoose.model('Pet', schema);
 }

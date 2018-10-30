@@ -21,4 +21,27 @@ function printValidate(name) {
 Object.keys(validator.regex).forEach(name => printRegEx(name));
 Object.keys(validator.validate).forEach(name => printValidate(name));
 
+// let reg = new RegExp('^[a-z]{2}[0-9]{2}$');
+
+// let myUsername = 'MeuUsername';
+// let myUsername2 = 'Username2Meu';
+// let error = '123Invalido';
+
+// console.log(myUsername.match(validator.regex.username));
+// console.log(myUsername2.match(validator.regex.username));
+// console.log(error.match(validator.regex.username));
+
+// console.log(validator.regex.username.test(myUsername2));
+// console.log(validator.regex.username.test(myUsername));
+// console.log(validator.regex.username.test(error));
+
+// let a = 'ab12';
+// let b = 'cd34';
+
+// console.log(a.match(reg));
+// console.log(b.match(reg));
+
+// console.log(reg.test(a));
+// console.log(reg.test(b));
+
 // Object.keys(validator.regex).forEach(name => console.log(validator.regex[name].source));

@@ -1,10 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const messageValidator = require('./../plugins/messageValidator');
-const validator = require('./../util/validator');
-
 module.exports = (api) => {
-    const Mongoose = require('mongoose');
-    const Schema = Mongoose.Schema;
+    const Validator = api.util.validator;
+
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
     const schema = new Schema({
         logradouro: {
@@ -19,7 +17,7 @@ module.exports = (api) => {
             uppercase: true,
             maxlength: 6,
             default: 'S/N',
-            validate: validator.validate.isNumero
+            validate: Validator.validate.isNumero
         },
         bairro: {
             type: String,
@@ -51,7 +49,7 @@ module.exports = (api) => {
             type: String,
             trim: true,
             default: 'Não Informado',
-            validate: validator.validate.isCEP
+            validate: Validator.validate.isCEP
         },
         complemento: {
             type: String,
@@ -60,7 +58,5 @@ module.exports = (api) => {
         }
     });
 
-    schema.plugin(messageValidator);
-
-    return Mongoose.model('Endereco', schema);
+    return mongoose.model('Endereco', schema);
 }

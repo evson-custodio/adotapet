@@ -1,19 +1,18 @@
 require('../config/mongoose')
 .connect(require('../config/env')['development'])
 .then(mongoose => {
-    const Mongoose = mongoose.Mongoose;
     const Usuario = require('../api/models/usuario')({});
     // const Endereco = require('../api/models/endereco')({});
 
     let usuarios = [
         {
-            email: 'emailvalido.com',
-            username: 'm',
-            password: 'minha_senha123'
-        },
-        {
             email: 'email@valido.com',
             username: 'MeuUsername',
+            password: 'Minha_senha123'
+        },
+        {
+            email: 'meuemail@valido.com',
+            username: 'MeuUsernameDenovo',
             password: 'Minha_senha123'
         }
     ]

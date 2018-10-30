@@ -1,10 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const messageValidator = require('./../plugins/messageValidator');
-const validator = require('./../util/validator');
-
 module.exports = (api) => {
-    const Mongoose = require('mongoose');
-    const Schema = Mongoose.Schema;
+    const Validator = api.util.validator;
+    
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
     const schema = new Schema({
         fotoPerfil: {
@@ -34,13 +32,13 @@ module.exports = (api) => {
             required: true,
             maxlenght: 64,
             unique: true,
-            validate: validator.validate.isEmail
+            validate: Validator.validate.isEmail
         },
         telefone: {
             type: String,
             required: true, 
             unique: true,
-            validate: validator.validate.isTelefone
+            validate: Validator.validate.isTelefone
         },
         cnpj: {
             type: String,
@@ -69,19 +67,16 @@ module.exports = (api) => {
                 required: true,
                 maxlenght: 64,
                 unique: false,
-                validate: validator.validate.isEmail
+                validate: Validator.validate.isEmail
             },
             telefone: {
                 type: String,
                 required: true,
                 unique: false,                
-                validate: validator.validate.isTelefone
+                validate: Validator.validate.isTelefone
             }
         }
     });
 
-    schema.plugin(uniqueValidator);
-    schema.plugin(messageValidator);
-
-    return Mongoose.model('Abrigo', schema);
+    return mongoose.model('Abrigo', schema);
 }

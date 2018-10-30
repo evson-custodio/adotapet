@@ -1,10 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const messageValidator = require('./../plugins/messageValidator');
-const validator = require('./../util/validator');
-
 module.exports = (api) => {
-    const Mongoose = require('mongoose');
-    const Schema = Mongoose.Schema;
+    const Validator = api.util.validator;
+
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
     const schema = new Schema({
         email: {
@@ -12,7 +10,7 @@ module.exports = (api) => {
             trim: true,
             maxlength: 64,
             required: true,
-            validate: validator.validate.isEmail,
+            validate: Validator.validate.isEmail,
             unique: true
         },
         username: {
@@ -21,7 +19,7 @@ module.exports = (api) => {
             minlength: 4,
             maxlength: 24,
             required: true,
-            validate: validator.validate.isUsername,
+            validate: Validator.validate.isUsername,
             unique: true
         },
         password: {
@@ -30,12 +28,10 @@ module.exports = (api) => {
             minlength: 8,
             maxlength: 16,
             required: true,
-            validate: validator.validate.isPassword
+            validate: Validator.validate.isPassword,
+            unique: false
         }
     });
 
-    schema.plugin(uniqueValidator);
-    schema.plugin(messageValidator);
-
-    return Mongoose.model('Usuario', schema);
+    return mongoose.model('Usuario', schema);
 }

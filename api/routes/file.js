@@ -1,6 +1,8 @@
+const express = require('express');
+
 module.exports = (api) => {
     const FileController = api.controllers.file;
-    const router = require('express').Router();
+    const router = express.Router();
 
     router.param('_id', FileController._id);
 

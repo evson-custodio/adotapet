@@ -1,10 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const messageValidator = require('./../plugins/messageValidator');
-const validator = require('./../util/validator');
-
 module.exports = (api) => {
-    const Mongoose = require('mongoose');
-    const Schema = Mongoose.Schema;
+    const Validator = api.util.validator;
+
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
     const schema = new Schema({
         fotoPerfil: {
@@ -33,12 +31,9 @@ module.exports = (api) => {
             type: String,
             trim: true,
             required: true,
-            validate: validator.validate.isTelefone
+            validate: Validator.validate.isTelefone
         }
     });
 
-    schema.plugin(uniqueValidator);
-    schema.plugin(messageValidator);
-
-    return Mongoose.model('Funcionario', schema);
+    return mongoose.model('Funcionario', schema);
 }
