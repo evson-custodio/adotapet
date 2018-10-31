@@ -8,7 +8,7 @@
     "start:dev": "cross-env DEBUG=adotapet:* NODE_ENV=development nodemon ./server.js",
     "start:test": "cross-env DEBUG=adotapet:* NODE_ENV=test nodemon ./server.js",
     "start:prod": "cross-env DEBUG=adotapet:* NODE_ENV=production nodemon ./server.js",
-    "start:testesintegracao": "mocha --opts testes/integração/config/mocha.opts testes/integração/*.js"
+    "start:testesintegracao": "mocha --opts testes/integração/config/mocha.opts testes/integração/config/ordem-testes.js"
   },
   "repository": {
     "type": "git",

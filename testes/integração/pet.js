@@ -1,21 +1,28 @@
 let defaultPet = {    
     "nome": "Biscoito",
-    "idade": "6",
     "especie": "Cachorro",
-    "raca": false,
+    "raca": "Bulldog",
     "pelagem": "Escura",
-    "peso": "15",
+    "peso": 15,
     "porte": "médio",
     "sexo": true,
     "castrado": false,
-    "medicamentoEspecifico": true,
-    "alimentacaoEspecifica": false,
-    "disponivelAdocao": true,
-    "disponivelAdocao": true,
-    "alimentacoes" : ["Cucuz (Somente após a janta)"],
-    "medicamentos" : [],
-    "vacinacao" : [],
-    "abrigo" : null
+
+    "caracteristicas" : {
+        "grauFobiaAoRuido" : 0,
+        "grauAgressividade" : 1,
+        "grauProtecao" : 1,
+        "grauAmizadeComDesconhecidos": 3,
+        "grauAmizadoComCriancas" : 2,
+        "grauAmizadeComAnimais": 2,
+        "grauEnergia" : 3,
+        "grauBrincalhao" : 3        
+    },
+    "estado" : "N/A",
+    "dataNascimento": "2018-01-01T02:00:00.000Z",
+    "alimentacoesEspecificas" : ["Cucuz (Somente após a janta)"],
+    "medicamentosEspecificos" : [],
+    "vacinacoes" : []
 }
 
 let defaultMedicamento = {
@@ -27,7 +34,7 @@ let defaultMedicamento = {
 let defaultVacina = {
     "nome" : "Leptospirose canina",
     "descricao" : "Os sintomas da leptospirose canina podem ser agudos ou crónicos. Nos casos agudos, a leptospiremia massiva origina uma vasculite e, inclusive, uma CID.",
-    "data" : "18/05/2018",
+    "data" : "01/05/2018",
     "aplicada": true    
 }
 
@@ -46,7 +53,7 @@ describe('Rota: Medicamento', function() {
                     a = res.body;           
                     assert.isTrue(isSubset(a, defaultMedicamento));
                     ultimoMedicamentoInseridoId = a._id;      
-                    defaultPet.medicamentos.push(ultimoMedicamentoInseridoId);                                   
+                    defaultPet.medicamentosEspecificos.push(ultimoMedicamentoInseridoId);                                   
                     done(err);
                 });
         });
@@ -73,29 +80,31 @@ describe('Rota: Vacina', function() {
                 .post('/api/vacina')               
                 .send(defaultVacina)
                 .end((err, res) => {   
-                    r = res.body;           
-                    assert.isTrue(isSubset(r, defaultVacina));            
+                    r = res.body;                               
+                    assert.equal(r.nome, defaultVacina.nome); 
+                    assert.equal(r.descricao, defaultVacina.descricao); 
+                    assert.equal(r.aplicada, defaultVacina.aplicada); 
+        
                     ultimaVacinaInseridaId = r._id;       
-                    defaultPet.vacinacao.push(ultimaVacinaInseridaId);
+                    defaultPet.vacinacoes.push(ultimaVacinaInseridaId);
                     done(err);
                 });
         });
     });
 
-    /*describe('POST /vacina', () => {
+    describe('POST /vacina', () => {
         it('retorna mensagem de erro ao inserir uma data incorreta no campo -Data da Aplicação da Vacina-', done => {
             let vacina = defaultVacina;
             vacina.data = "32/18/2015"
             request
                 .put('/api/vacina/' + ultimaVacinaInseridaId)
                 .send(vacina)
-                .end((err, res) => {   
-                    r = res.body;           
-                    assert.notEqual(r.data, vacina.data);            
+                .end((err, res) => {      
+                    assert.equal(res.body.kind, "date");        
                     done(err);
                 });
         });
-    });*/
+    });
 
     describe('POST /vacina', () => {
         it('retorna mensagem de erro caso houver campo obrigatório não preenchido', done => {
@@ -116,7 +125,7 @@ describe('Rota: Vacina', function() {
 describe('Rota: Pet', function() {
     describe('POST /pet', () => {
         it('insere um pet', done => {
-            defaultPet.abrigo = ultimoAbrigoInseridoId;
+            //defaultPet.abrigo = ultimoAbrigoInseridoId;
             request
                 .post('/api/pet')               
                 .send(defaultPet)
@@ -158,9 +167,8 @@ describe('Rota: Pet', function() {
 
     describe('PUT /pet/{id}', () => {
         it('edita um pet', done => {            
-            defaultPet.nome = "Chocolate";
-            defaultPet.idade = "9";            
-            defaultPet.peso = "20";            
+            defaultPet.nome = "Chocolate";          
+            defaultPet.peso = 20;            
             request
                 .put('/api/pet/' + ultimoPetInseridoId)
                 .send(defaultPet)
@@ -187,7 +195,7 @@ describe('Rota: Pet', function() {
     });
     */
 
-    describe('POST /pet', () => {
+    /*describe('POST /pet', () => {
         it('retorna mensagem de erro ao vincular um porte que não esteja pré-cadastrado no sistema ao pet', done => {
             let pet = defaultPet;
             pet.porte = "Muito Muito Grande";
@@ -199,7 +207,7 @@ describe('Rota: Pet', function() {
                     done(err);
                 });
         });
-    }); 
+    }); */
 
     describe('POST /pet', () => {
         it('retorna mensagem de erro caso houver campo obrigatório não preenchido', done => {
@@ -218,17 +226,18 @@ describe('Rota: Pet', function() {
         describe('PUT /pet/{id}', () => {
             it('remove o vínculo do medicamento com o pet', done => {            
                 let pet = defaultPet;        
-                pet.medicamentos = [];
+                pet.medicamentosEspecificos = [];
                 request
                     .put('/api/pet/' + ultimoPetInseridoId)
                     .send(pet)
                     .end((err, res) => {
                         let r = res.body;
-                        assert.equal(r.medicamentos.length, 0);      
+                        assert.equal(r.medicamentosEspecificos.length, 0);      
                         done(err);
                     });
             });
         });
+
         describe('DELETE /medicamento/{id}', () => {
             it('remove o medicamento da base de dados', done => {
                 request
@@ -245,13 +254,13 @@ describe('Rota: Pet', function() {
         describe('PUT /pet/{id}', () => {
             it('remove o vínculo da vacina com o pet', done => {            
                 let pet = defaultPet;        
-                pet.medicamentos = [];
+                pet.vacinacoes = [];
                 request
                     .put('/api/pet/' + ultimoPetInseridoId)
                     .send(pet)
                     .end((err, res) => {
                         let r = res.body;
-                        assert.equal(r.medicamentos.length, 0);      
+                        assert.equal(r.vacinacoes.length, 0);      
                         done(err);
                     });
             });

@@ -1,11 +1,8 @@
 let defaultUsuario = {
-    "nome": "Fábio de Melo",
     "email": "fm@gmail.com",
     "username": "fabio",
-    "password": "123456"
+    "password": "@A123456789x"
 }
-
-let ultimoUsuarioInseridoId;
 
 describe('Rota: Usuario', function() {    
     describe('POST /usuario', () => {
@@ -13,9 +10,8 @@ describe('Rota: Usuario', function() {
             request
                 .post('/api/usuario')               
                 .send(defaultUsuario)
-                .end((err, res) => {                                    
+                .end((err, res) => {                
                     let u = res.body;
-                    assert.equal(u.nome, defaultUsuario.nome);                                         
                     assert.equal(u.email, defaultUsuario.email);                                         
                     assert.equal(u.username, defaultUsuario.username);                                         
                     
@@ -59,7 +55,6 @@ describe('Rota: Usuario', function() {
                 .end(function(err, res){
                     let usuarios = res.body;
                     let u = usuarios.filter(a => a._id == ultimoUsuarioInseridoId);
-                    assert.equal(u[0].nome, defaultUsuario.nome);                                         
                     assert.equal(u[0].email, defaultUsuario.email);                                         
                     assert.equal(u[0].username, defaultUsuario.username);                  
                     done(err);
@@ -69,13 +64,12 @@ describe('Rota: Usuario', function() {
 
     describe('PUT /usuario/{id}', () => {
         it('atualiza um usuario', done => {
-            defaultUsuario.nome = "Fabio de Melo dos Santos";
-            defaultUsuario.password = "123";   
+            defaultUsuario.email = "fms@gmail.com";   
             request
                 .put('/api/usuario/' + ultimoUsuarioInseridoId)
                 .send(defaultUsuario)
                 .end((err, res) => {
-                    assert.equal(res.body.nome, defaultUsuario.nome);                           
+                    assert.equal(res.body.email, defaultUsuario.email);                           
                     done(err);
                 });
         });
