@@ -76,8 +76,8 @@ function Validator() {
             message: this.message.notValid
         },
         isPassword: {
-            validator: value => value.match(this.regex.lowercase) != null &&
-                                value.match(this.regex.uppercase) != null &&
+            validator: value => (value.match(this.regex.lowercase) != null || value.match(this.regex.lowercaseAccented)) &&
+                                (value.match(this.regex.uppercase) != null || value.match(this.regex.uppercaseAccented)) &&
                                 value.match(this.regex.digits) != null &&
                                 this.regex.password.test(value),
             message: this.message.notValid
