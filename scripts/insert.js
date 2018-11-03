@@ -17,6 +17,12 @@ require('../config/mongoose')
         }
     ]
 
+    // let funcionarios = [
+    //     {
+            
+    //     }
+    // ]
+
     let enderecos = [
         {
             logradouro: 'Rua Olímpio Correa de Miranda',

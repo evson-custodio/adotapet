@@ -1,11 +1,17 @@
 const validator = require('./../api/util/validator');
 
 const testes = [
-    'evson.custodio',
-    'evsoncustodiooli@gmail.com',
-    'evson custodio',
-    'évson_custódio',
-    '123Minha1_senha123'
+    // 'evson.custodio',
+    // 'evsoncustodiooli@gmail.com',
+    // 'evson custodio',
+    // 'évson_custódio',
+    // '123Minha1_senha123',
+    '27998547031',
+    '27 998547031',
+    '(27)998547031',
+    '(27) 998547031',
+    '(27) 99854-7031',
+    '(27) 9854-7031'
 ]
 
 function printRegEx(name) {

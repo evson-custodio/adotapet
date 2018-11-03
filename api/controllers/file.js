@@ -3,12 +3,10 @@ const debug = require('debug')('adotapet:api:controllers:file');
 module.exports = (api) => {
     const gfs = api.mongoose.gfs;
     const FileSchema = api.models.file;
-    const ObjectId = api.mongoose.Types.ObjectId;
 
     return {
         _id: (req, res, next, _id) => {
             req._id = _id;
-            // req._id = new ObjectId(_id);
             next();
         },
         create: (req, res) => {

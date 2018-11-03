@@ -13,6 +13,7 @@ function Validator() {
         uppercaseAccented: 'ÁÉÍÓÚÂÊÎÔÛÀÈÌÒÙÄËÏÖÜÃÕ'
     },
     this.message = {
+        notMongoId: prop => `O valor '${prop.value} não é um ObjectId válido!`,
         notValid: prop => `O valor '${prop.value}' não é um '${prop.path}' válido!`
     },
     this.regex = {
@@ -57,11 +58,12 @@ function Validator() {
             + this.caracteres.digits + ']{3}-['
             + this.caracteres.digits + ']{3}'
         ),
-        telefone: new RegExp('^['
-            + this.caracteres.digits + ']{2}['
-            + this.caracteres.digits + ']?['
-            + this.caracteres.digits + ']{4}-['
-            + this.caracteres.digits + ']{4}$'
+        telefone: new RegExp('^'
+            + '\\([' + this.caracteres.digits + ']{2}\\)'
+            + this.caracteres.space
+            + '[' + this.caracteres.digits + ']?'
+            + '[' + this.caracteres.digits + ']{4}'
+            + '-[' + this.caracteres.digits + ']{4}$'
         )
     },
     this.validate = {

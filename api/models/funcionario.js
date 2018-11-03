@@ -15,7 +15,9 @@ module.exports = (api) => {
         },
         usuario: {
             type: 'ObjectId',
-            ref: 'Usuario'
+            ref: 'Usuario',
+            required: true,
+            unique: true
         },
         endereco: {
             type: 'ObjectId',
