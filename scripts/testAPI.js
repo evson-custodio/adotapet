@@ -52,7 +52,7 @@ require('./../api')(require('./../config/env')['development'])
 
     createMany(Funcionario, funcionarios, true)
     .then(results => {
-        debug(results.errors[1].errors);
+        debug(results);
         process.exit(0);
     })
     .catch(error => {

@@ -1,31 +1,26 @@
 module.exports = (api) => {
-    const Validator = api.util.validator;
-    
     const mongoose = api.mongoose;
     const Schema = mongoose.Schema;
 
     const schema = new Schema({
         nome: {
             type: String,
+            trim: true,
             maxlenght: 32,
-            required: true,
-            unique: false
+            required: true
         },
         descricao: {
             type: String,
+            trim: true,
             maxlenght: 256,
-            required: true,
-            unique: false
+            required: true
         },
         data: {
-            type: Date,
-            required: false,
-            unique: false
+            type: Date
         },
         aplicada: {
             type: Boolean,
-            required: false,
-            unique: false
+            required: true
         }
     });
 

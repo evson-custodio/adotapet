@@ -9,6 +9,10 @@ module.exports = (api) => {
             type: 'ObjectId',
             ref: 'File'
         },
+        endereco: {
+            type: 'ObjectId',
+            ref: 'Endereco'
+        },
         funcionarios: [
             {
                 type: 'ObjectId',
@@ -23,56 +27,56 @@ module.exports = (api) => {
         ],
         nome: {
             type: String,
+            trim: true,
+            maxlength: 64,
             required: true,
-            maxlenght: 16,
             unique: true
         },
         email: {
             type: String,
+            trim: true,
+            maxlength: 64,
             required: true,
-            maxlenght: 64,
             unique: true,
             validate: Validator.validate.isEmail
         },
         telefone: {
             type: String,
+            trim: true,
             required: true, 
             unique: true,
             validate: Validator.validate.isTelefone
         },
         cnpj: {
             type: String,
+            trim: true,
             required: true, 
-            unique: true
+            unique: true,
+            validate: Validator.validate.isCNPJ
         },
         historia: {
             type: String,
-            required: false,
-            maxlenght: 512,
-            unique: false
-        },
-        endereco: {
-            type: 'ObjectId',
-            ref: 'Endereco'
+            trim: true,
+            maxlength: 512,
         },
         responsavel: {
             nome: {
                 type: String,
-                required: true,
-                unique: false,
-                maxlenght: 64
+                trim: true,
+                maxlength: 64,
+                required: true
             },
             email: {
                 type: String,
+                trim: true,
+                maxlength: 64,
                 required: true,
-                maxlenght: 64,
-                unique: false,
                 validate: Validator.validate.isEmail
             },
             telefone: {
                 type: String,
+                trim: true,
                 required: true,
-                unique: false,                
                 validate: Validator.validate.isTelefone
             }
         }

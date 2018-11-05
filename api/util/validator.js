@@ -64,6 +64,15 @@ function Validator() {
             + '[' + this.caracteres.digits + ']?'
             + '[' + this.caracteres.digits + ']{4}'
             + '-[' + this.caracteres.digits + ']{4}$'
+        ),
+        cnpj: new RegExp('^['
+            + this.caracteres.digits + ']{2}\\'
+            + this.caracteres.point + '['
+            + this.caracteres.digits + ']{3}\\'
+            + this.caracteres.point + '['
+            + this.caracteres.digits + ']{3}/['
+            + this.caracteres.digits + ']{4}-['
+            + this.caracteres.digits + ']{2}$'
         )
     },
     this.validate = {
@@ -92,6 +101,10 @@ function Validator() {
         },
         isTelefone: {
             validator: value => this.regex.telefone.test(value),
+            message: this.message.notValid
+        },
+        isCNPJ: {
+            validator: value => this.regex.cnpj.test(value),
             message: this.message.notValid
         }
     }

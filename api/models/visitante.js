@@ -15,16 +15,16 @@ module.exports = (api) => {
             required: true,
             unique: true
         },
+        endereco: {
+            type: 'ObjectId',
+            ref: 'Endereco'
+        },
         solicitacoes: [
             {
                 type: 'ObjectId',
                 ref: 'Solicitacao'
             }
         ],
-        endereco: {
-            type: 'ObjectId',
-            ref: 'Endereco'
-        },
         nome: {
             type: String,
             trim: true,

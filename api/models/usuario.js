@@ -10,8 +10,8 @@ module.exports = (api) => {
             trim: true,
             maxlength: 64,
             required: true,
-            validate: Validator.validate.isEmail,
-            unique: true
+            unique: true,
+            validate: Validator.validate.isEmail
         },
         username: {
             type: String,
@@ -19,8 +19,8 @@ module.exports = (api) => {
             minlength: 4,
             maxlength: 24,
             required: true,
-            validate: Validator.validate.isUsername,
-            unique: true
+            unique: true,
+            validate: Validator.validate.isUsername
         },
         password: {
             type: String,
@@ -28,8 +28,7 @@ module.exports = (api) => {
             minlength: 8,
             maxlength: 16,
             required: true,
-            validate: Validator.validate.isPassword,
-            unique: false
+            validate: Validator.validate.isPassword
         }
     });
 

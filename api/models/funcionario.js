@@ -26,7 +26,7 @@ module.exports = (api) => {
         nome: {
             type: String,
             trim: true,
-            maxlenght: 64,
+            maxlength: 64,
             required: true
         },
         telefone: {

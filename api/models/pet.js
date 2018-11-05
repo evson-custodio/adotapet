@@ -24,114 +24,99 @@ module.exports = (api) => {
         alimentacoesEspecificas: [
             {
                 type: String,
-                unique: false,
-                required: false
+                trim: true
             }
         ],
         deficienciasOuDoencas: [
             {
                 type: String,
-                unique: false,
-                required: false
+                trim: true
             }
         ],
         nome: {
             type: String,
+            trim: true,
             maxlenght: 16,
-            required: true,
-            unique: false
+            required: true
         },
         dataNascimento: {
             type: Date,
-            required: true,
-            unique: false
+            required: true
         },
         especie: {
             type: String,
-            required: true,
-            unique: false
+            trim: true,
+            required: true
         },
         raca: {
             type: String,
-            required: true,
-            unique: false
+            trim: true,
+            required: true
         },
         pelagem: {
             type: String,
-            required: true,
-            unique: false
+            trim: true,
+            required: true
         },
         peso: {
             type: Number,
-            required: true,
-            unique: false
+            required: true
         },
         porte: {
             type: String,
-            required: true,
-            unique: false
+            trim: true,
+            required: true
         },
         historia: {
             type: String,
-            maxlenght: 512,
-            required: false,
-            unique: false
+            trim: true,
+            maxlenght: 512
         },
         sexo: {
             type: Boolean,
-            required: true,
-            unique: false
+            required: true
         },
         castrado: {
             type: Boolean,
-            required: true,
-            unique: false
+            required: true
         },
         estado: {
             type: String,
-            required: true,
-            unique: false
+            trim: true,
+            required: true
         },
         caracteristicas: {
             grauBrincalhao: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauEnergia: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauAmizadeComAnimais: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauAmizadoComCriancas: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauAmizadeComDesconhecidos: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauProtecao: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauAgressividade: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             },
             grauFobiaAoRuido: {
                 type: Number,
-                required: true,
-                unique: false
+                required: true
             }
         }
     });
