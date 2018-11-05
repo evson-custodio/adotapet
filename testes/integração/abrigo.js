@@ -2,12 +2,12 @@ let defaultAbrigo = {
     "fotoPerfil": "5b82fb5f624db51c0c1f6cf4",
     "nome": "Abrigo de Testes",
     "email": "testes@adotapet.com",
-    "telefone": "279986-1478",
+    "telefone": "(27) 9986-1478",
     "cnpj": "43.165.473/0001-51",
     "responsavel": {
         "nome": "Will Smith",
         "email": "will@gmail.com",
-        "telefone": "279986-1478"
+        "telefone": "(27) 9986-1478"
     },
     "endereco" : null
 }
