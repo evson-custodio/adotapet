@@ -83,7 +83,7 @@ module.exports = (api) => {
         estado: {
             type: String,
             trim: true,
-            required: true
+            default: 'Não Disponível para Adoção'
         },
         caracteristicas: {
             grauBrincalhao: {
