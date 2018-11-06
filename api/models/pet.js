@@ -8,7 +8,11 @@ module.exports = (api) => {
         fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
-        },   
+        },
+        abrigo: {
+            type: 'ObjectId',
+            ref: 'Abrigo'
+        },
         vacinacoes: [
             {
                 type: 'ObjectId',
