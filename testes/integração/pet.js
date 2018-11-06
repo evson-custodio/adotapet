@@ -40,7 +40,6 @@ let defaultVacina = {
 
 let ultimoMedicamentoInseridoId;
 let ultimaVacinaInseridaId;
-let ultimoPetInseridoId;
 
 
 describe('Rota: Medicamento', function() {

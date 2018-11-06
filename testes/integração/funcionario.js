@@ -1,7 +1,7 @@
 let defaultFuncionario = {
     "nome" : "Fábio de Melo",
     "usuario" : null,
-    "telefone" : "279986-1478"
+    "telefone" : "(27) 9986-1478"
 }
 
 let ultimoFuncionarioInseridoId;
