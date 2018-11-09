@@ -15,54 +15,54 @@ module.exports = (api) => {
         },
         questionario: {
             rendaMensal: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             teveAnimais: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             temAnimais: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             temCriancas: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             viajaFrequentemente: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             resideEm: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             redeProtecao: {
-                type: Boolean,
+                type: 'Boolean',
                 required: true
             },
             razao: {
-                type: String,
+                type: 'String',
                 trim: true,
                 required: true
             },
             rotina: {
-                type: String,
+                type: 'String',
                 trim: true,
                 required: true
             }
         },
         data: {
-            type: Date,
+            type: 'Date',
             default: Date.now
         },
         status: {
-            type: String,
+            type: 'String',
             default: 'Em Espera'
         },
         motivo: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 256
         }

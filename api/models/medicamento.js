@@ -4,22 +4,22 @@ module.exports = (api) => {
 
     const schema = new Schema({
         usoContinuo: {
-            type: Boolean,
+            type: 'Boolean',
             required: true
         },
         nome: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlenght: 64,
             required: true
         },
         apresentacao: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true
         },
         dosagem: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlenght: 64,
             required: true

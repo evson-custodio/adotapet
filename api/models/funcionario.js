@@ -24,13 +24,13 @@ module.exports = (api) => {
             ref: 'Endereco'
         },
         nome: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true
         },
         telefone: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true,
             validate: Validator.validate.isTelefone

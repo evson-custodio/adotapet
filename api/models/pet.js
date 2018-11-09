@@ -27,99 +27,99 @@ module.exports = (api) => {
         ],
         alimentacoesEspecificas: [
             {
-                type: String,
+                type: 'String',
                 trim: true
             }
         ],
         deficienciasOuDoencas: [
             {
-                type: String,
+                type: 'String',
                 trim: true
             }
         ],
         nome: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlenght: 16,
             required: true
         },
         dataNascimento: {
-            type: Date,
+            type: 'Date',
             required: true
         },
         especie: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true
         },
         raca: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true
         },
         pelagem: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true
         },
         peso: {
-            type: Number,
+            type: 'Number',
             required: true
         },
         porte: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true
         },
         historia: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlenght: 512
         },
         sexo: {
-            type: Boolean,
+            type: 'Boolean',
             required: true
         },
         castrado: {
-            type: Boolean,
+            type: 'Boolean',
             required: true
         },
         estado: {
-            type: String,
+            type: 'String',
             trim: true,
             default: 'Não Disponível para Adoção'
         },
         caracteristicas: {
             grauBrincalhao: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauEnergia: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauAmizadeComAnimais: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauAmizadoComCriancas: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauAmizadeComDesconhecidos: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauProtecao: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauAgressividade: {
-                type: Number,
+                type: 'Number',
                 required: true
             },
             grauFobiaAoRuido: {
-                type: Number,
+                type: 'Number',
                 required: true
             }
         }

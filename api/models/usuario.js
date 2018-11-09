@@ -6,7 +6,7 @@ module.exports = (api) => {
 
     const schema = new Schema({
         email: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true,
@@ -14,7 +14,7 @@ module.exports = (api) => {
             validate: Validator.validate.isEmail
         },
         username: {
-            type: String,
+            type: 'String',
             trim: true,
             minlength: 4,
             maxlength: 24,
@@ -23,7 +23,7 @@ module.exports = (api) => {
             validate: Validator.validate.isUsername
         },
         password: {
-            type: String,
+            type: 'String',
             trim: true,
             minlength: 8,
             maxlength: 16,

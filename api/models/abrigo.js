@@ -26,14 +26,14 @@ module.exports = (api) => {
             }
         ],
         nome: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true,
             unique: true
         },
         email: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true,
@@ -41,40 +41,40 @@ module.exports = (api) => {
             validate: Validator.validate.isEmail
         },
         telefone: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true, 
             unique: true,
             validate: Validator.validate.isTelefone
         },
         cnpj: {
-            type: String,
+            type: 'String',
             trim: true,
             required: true, 
             unique: true,
             validate: Validator.validate.isCNPJ
         },
         historia: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 512,
         },
         responsavel: {
             nome: {
-                type: String,
+                type: 'String',
                 trim: true,
                 maxlength: 64,
                 required: true
             },
             email: {
-                type: String,
+                type: 'String',
                 trim: true,
                 maxlength: 64,
                 required: true,
                 validate: Validator.validate.isEmail
             },
             telefone: {
-                type: String,
+                type: 'String',
                 trim: true,
                 required: true,
                 validate: Validator.validate.isTelefone

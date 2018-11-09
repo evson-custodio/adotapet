@@ -3,7 +3,7 @@ const express = require('express');
 
 function Generic() {
     this.getController = (api, modelName) => {
-        const Model = api.models[modelName];
+        const Model = api.models[modelName.toLocaleLowerCase()];
         return {
             _id: (req, res, next, _id) => {
                 req._id = _id;
@@ -19,8 +19,9 @@ function Generic() {
                 })
             },
             read: (req, res, next) => {
-                Model.findOne({ _id: req._id })
-                .exec()
+                let query = Model.findOne({ _id: req._id });
+                Model.schema.populable.forEach(path => query.populate(path));
+                query.exec()
                 .then(doc => {
                     if (doc) {
                         res.status(200).json(doc);
@@ -84,6 +85,16 @@ function Generic() {
                 .catch(error => {
                     res.status(400).json(error);
                 });
+            },
+            schema: (req, res, next) => {
+                if (!Model.schema.modelSchema) {
+                    res.status(400).json({
+                        message: "Funcionalidade desativada para o Model '" + Model.modelName + "': Certifique de ativar o plugin 'modelSchema'."
+                    });
+                }
+                else {
+                    res.status(200).json(Model.schema.modelSchema);
+                }
             }
         }
     },
@@ -100,6 +111,8 @@ function Generic() {
         const router = express.Router();
 
         router.param('_id', Controller._id);
+
+        router.get('/schema', Controller.schema);
 
         router.route('/')
         .get(Controller.list)

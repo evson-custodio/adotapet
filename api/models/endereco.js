@@ -6,13 +6,13 @@ module.exports = (api) => {
 
     const schema = new Schema({
         logradouro: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true
         },
         numero: {
-            type: String,
+            type: 'String',
             trim: true,
             uppercase: true,
             maxlength: 6,
@@ -20,19 +20,19 @@ module.exports = (api) => {
             validate: Validator.validate.isNumero
         },
         bairro: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 32,
             required: true
         },
         cidade: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 32,
             required: true
         },
         uf: {
-            type: String,
+            type: 'String',
             trim: true,
             uppercase: true,
             minlength: 2,
@@ -40,19 +40,19 @@ module.exports = (api) => {
             required: true
         },
         pais: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 32,
             required: true
         },
         cep: {
-            type: String,
+            type: 'String',
             trim: true,
             default: 'Não Informado',
             validate: Validator.validate.isCEP
         },
         complemento: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64
         }

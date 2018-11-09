@@ -4,6 +4,7 @@ const Grid = require('gridfs-stream');
 const uniqueValidator = require('mongoose-unique-validator');
 const messageValidator = require('./../plugins/messageValidator');
 const queryableAndPopulable = require('./../plugins/queryableAndPopulable');
+const modelSchema = require('./../plugins/modelSchema');
 
 const debug = require('debug')('adotapet:config:mongoose');
 
@@ -24,6 +25,7 @@ module.exports.connect = (config) => new Promise((resolve, reject) => {
             mongoose.plugin(uniqueValidator);
             mongoose.plugin(messageValidator);
             mongoose.plugin(queryableAndPopulable);
+            mongoose.plugin(modelSchema);
 
             resolve(mongoose);
         })

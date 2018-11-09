@@ -26,13 +26,13 @@ module.exports = (api) => {
             }
         ],
         nome: {
-            type: String,
+            type: 'String',
             trim: true,
             maxlength: 64,
             required: true
         },
         dataNascimento: {
-            type: Date
+            type: 'Date'
         }
     });
 
