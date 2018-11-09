@@ -22,13 +22,14 @@ function Generic() {
                 Model.findOne({ _id: req._id })
                 .exec()
                 .then(doc => {
-                    if (doc === null) {
-                        res.status(404);
+                    if (doc) {
+                        res.status(200).json(doc);
                     }
                     else {
-                        res.status(200);
+                        res.status(404).json({
+                            message: modelName + ' não encontrado!'
+                        });
                     }
-                    res.json(doc);
                 })
                 .catch(error => {
                     res.status(400).json(error);
