@@ -1,14 +1,14 @@
 module.exports = (schema, options) => {
-    // console.log(schema);
-    // schema.plugin(require('./queryableAndPopulable'));
-
     let modelSchema = {
         object: schema.obj,
-        populable: schema.populable
+        populable: schema.pluginNames.includes('queryableAndPopulable') ? schema.populable : "Funcionalidade desativada para o Model: Certifique-se de ativar o plugin 'queryableAndPopulable'." 
     }
 
     removePaths(modelSchema.object);
     schema.modelSchema = modelSchema;
+
+    schema.pluginNames = schema.pluginNames || [];
+    schema.pluginNames.push('modelSchema');
 
     function removePaths(obj) {
         let query = obj;

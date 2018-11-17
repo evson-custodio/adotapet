@@ -19,9 +19,9 @@ function Generic() {
                 })
             },
             read: (req, res, next) => {
-                let query = Model.findOne({ _id: req._id });
-                Model.schema.populable.forEach(path => query.populate(path));
-                query.exec()
+                Model.findOne({ _id: req._id })
+                .populate(Model.schema.populable.join(' '))
+                .exec()
                 .then(doc => {
                     if (doc) {
                         res.status(200).json(doc);
@@ -76,9 +76,9 @@ function Generic() {
                     }
                 });
 
-                let query = Model.find(req.query);
-                Model.schema.populable.forEach(path => query.populate(path));
-                query.exec()
+                Model.find(req.query)
+                .populate(Model.schema.populable.join(' '))
+                .exec()
                 .then(docs => {
                     res.status(200).json(docs);
                 })
@@ -87,9 +87,9 @@ function Generic() {
                 });
             },
             schema: (req, res, next) => {
-                if (!Model.schema.modelSchema) {
+                if (!Model.schema.pluginNames.includes('modelSchema')) {
                     res.status(400).json({
-                        message: "Funcionalidade desativada para o Model '" + Model.modelName + "': Certifique de ativar o plugin 'modelSchema'."
+                        message: "Funcionalidade desativada para o Model '" + Model.modelName + "': Certifique-se de ativar o plugin 'modelSchema'."
                     });
                 }
                 else {
@@ -125,6 +125,19 @@ function Generic() {
         .patch(Controller.patch);
 
         return router;
+    },
+    this.rest = (app, api) => {
+        let routesNames = Object.keys(api.routes);
+        let modelsNames = Object.keys(api.models);
+    
+        routesNames.forEach(routeName => {
+            app.use('/api/' + routeName, api.routes[routeName]);
+        });
+    
+        modelsNames.filter(modelName => !routesNames.includes(modelName))
+        .forEach(modelName => {
+            app.use('/api/' + modelName, this.getRouter(api, modelName));
+        });
     }
 }
 

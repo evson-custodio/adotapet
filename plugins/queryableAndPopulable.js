@@ -12,4 +12,7 @@ module.exports = (schema, options) => {
             schema.populable.push(path);
         }
     });
+
+    schema.pluginNames = schema.pluginNames || [];
+    schema.pluginNames.push('queryableAndPopulable');
 }

@@ -35,4 +35,7 @@ module.exports = (schema, options) => {
             unique.message = message;
         }
     });
+
+    schema.pluginNames = schema.pluginNames || [];
+    schema.pluginNames.push('messageValidator');
 }

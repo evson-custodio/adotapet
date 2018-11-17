@@ -7,11 +7,13 @@ module.exports = (api) => {
     const schema = new Schema({
         adotante: {
             type: 'ObjectId',
-            ref: 'Visitante'
+            ref: 'Visitante',
+            required: true
         },
         pet: {
             type: 'ObjectId',
-            ref: 'Pet'
+            ref: 'Pet',
+            required: true
         },
         questionario: {
             rendaMensal: {
@@ -59,7 +61,14 @@ module.exports = (api) => {
         },
         status: {
             type: 'String',
-            default: 'Em Espera'
+            trim: true,
+            enum: [
+                'Pendente',
+                'Avaliando',
+                'Aceita',
+                'Recusada'
+            ],
+            default: 'Pendente'
         },
         motivo: {
             type: 'String',
