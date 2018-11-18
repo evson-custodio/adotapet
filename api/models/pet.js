@@ -13,23 +13,6 @@ module.exports = (api) => {
             type: 'ObjectId',
             ref: 'Abrigo'
         },
-        solicitacoes: [
-            {
-                type: 'ObjectId',
-                ref: 'Solicitacao'
-            }
-        ],
-        estado: {
-            type: 'String',
-            trim: true,
-            enum: [
-                'Não Disponível para Adoção',
-                'Disponível para Adoação',
-                'Avaliando os Candidatos à Adoção',
-                'Adotado'
-            ],
-            default: 'Não Disponível para Adoção'
-        },
         vacinacoes: [
             {
                 type: 'ObjectId',
@@ -100,6 +83,32 @@ module.exports = (api) => {
         castrado: {
             type: 'Boolean',
             required: true
+        },
+        adocao: {
+            solicitacoes: [
+                {
+                    type: 'ObjectId',
+                    ref: 'Solicitacao'
+                }
+            ],
+            estado: {
+                type: 'String',
+                trim: true,
+                enum: [
+                    'Não Disponível para Adoção',
+                    'Disponível para Adoação',
+                    'Avaliando os Candidatos à Adoção',
+                    'Adotado'
+                ],
+                default: 'Não Disponível para Adoção'
+            },
+            quantidadeCandidatos: {
+                type: 'Number',
+                default: 0
+            },
+            dataLimite: {
+                type: 'Date'
+            }
         },
         caracteristicas: {
             grauBrincalhao: {
