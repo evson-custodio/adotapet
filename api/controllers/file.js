@@ -1,18 +1,12 @@
 const debug = require('debug')('adotapet:api:controllers:file');
 
 module.exports = (api) => {
-    // const FileSchema = require('mongoose').model('File');
-    const FileSchema = api.models.file;
-    const ObjectId = api.mongoose.Mongoose.Types.ObjectId;
     const gfs = api.mongoose.gfs;
+    const FileSchema = api.models.file;
 
     return {
-        handlerId: (req, res, next, id) => {
-            req.id = new ObjectId(id);
-            next();
-        },
-        handlerName: (req, res, next, name) => {
-            req.name = name;
+        _id: (req, res, next, _id) => {
+            req._id = _id;
             next();
         },
         create: (req, res) => {
@@ -20,53 +14,65 @@ module.exports = (api) => {
                 filename: req.headers.filename
             });
             req.pipe(ws);
+            ws.on('error', error => {
+                debug(error);
+                res.status(400).json(error);
+            });
             ws.on('close', file => {
-                debug('File created ' + file.filename + '!');
+                debug('File ' + file.filename + ' criado!');
                 res.status(201).json(file);
             });
         },
-        getById: (req, res) => {
-            console.log('getById!');
-            gfs.createReadStream({_id: req.id}).pipe(res)
-            .on('finish', () => {
-                debug('File sent by id!');
-            });
-        },
-        getByName: (req, res) => {
-            gfs.createReadStream({filename: req.name}).pipe(res)
-            .on('finish', () => {
-                debug('File sent by name!');
-            });
-        },
-        deleteById: (req, res) => {
-            gfs.remove({_id: req.id}, err => {
-                if (err) {
-                    res.status(400).json(err);
+        read: (req, res) => {
+            FileSchema.findOne({_id: req._id})
+            .exec()
+            .then(file => {
+                if (file) {
+                    gfs.createReadStream({_id: req._id}).pipe(res)
+                    .on('finish', () => {
+                        debug('File ' + file._id + ' enviado pelo id!');
+                    });
                 }
                 else {
-                    debug('File ' + file.filename + ' deleted by id!');
-                    res.send('OK!');
+                    res.status(404).json({
+                        message: 'File não encontrado!'
+                    });
                 }
+            })
+            .catch(error => {
+                res.status(400).json(error);
             });
         },
-        deleteByName: (req, res) => {
-            gfs.remove({filename: req.name}, err => {
-                if (err) {
-                    res.status(400).json(err);
+        delete: (req, res) => {
+            FileSchema.findOne({_id: req._id})
+            .exec()
+            .then(file => {
+                if (file) {
+                    gfs.remove({_id: req._id}, error => {
+                        if (error) {
+                            res.status(400).json(error);
+                        }
+                        else {
+                            debug('File ' + file._id + ' deletado pelo id!');
+                            res.status(200).json(file);
+                        }
+                    });
                 }
                 else {
-                    debug('File ' + file.filename + ' deleted by name!');
-                    res.send('OK!');
+                    res.status(404).json({
+                        message: 'File não encontrado!'
+                    });
                 }
+            })
+            .catch(error => {
+                res.status(404).json(error);
             });
         },
         list: (req, res) => {
             FileSchema.find(req.query)
             .exec()
             .then(files => {
-                debug('Files: ');
-                debug(files);
-                res.json(files);
+                res.status(200).json(files);
             })
             .catch(error => {
                 res.status(400).json(error);

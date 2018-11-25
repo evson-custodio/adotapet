@@ -1,7 +1,8 @@
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
-    const FileSchema = Mongoose.Schema({}, { strict: false });
+    const schema = new Schema({}, { strict: false });
     
-    return Mongoose.model('File', FileSchema, 'fs.files');
+    return mongoose.model('File', schema, 'fs.files');
 }

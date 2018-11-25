@@ -1,14 +1,17 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
-
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    const Validator = api.util.validator;
+    
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
 
-    const AbrigoSchema = new Schema({
+    const schema = new Schema({
         fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
+        },
+        endereco: {
+            type: 'ObjectId',
+            ref: 'Endereco'
         },
         funcionarios: [
             {
@@ -22,77 +25,68 @@ module.exports = (api) => {
                 ref: 'Pet'
             }
         ],
+        doacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Doacao'
+            }
+        ],
         nome: {
-            type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!'],
+            type: 'String',
+            trim: true,
+            maxlength: 64,
+            required: true,
             unique: true
         },
         email: {
-            type: String,
-            required: [true, 'A propriedade "email" é obrigatória!'],
+            type: 'String',
+            trim: true,
+            maxlength: 64,
+            required: true,
             unique: true,
-            validate: {
-                validator: (v) => validator.isEmail(v),
-                message: props => `${props.value} não é um "email" valido!`
-            }
+            validate: Validator.validate.isEmail
         },
         telefone: {
-            type: String,
-            required: [true, 'A propriedade "telefone" é obrigatória!'],
+            type: 'String',
+            trim: true,
+            required: true, 
             unique: true,
-            validate: {
-                validator: (v) => {
-                    return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
-                },
-                message: props => `${props.value} não é um "telefone" valido!`
-            }
+            validate: Validator.validate.isTelefone
         },
         cnpj: {
-            type: String,
-            required: [true, 'A propriedade "cnpj" é obrigatória!'],
+            type: 'String',
+            trim: true,
+            required: true, 
             unique: true,
-            // xx.xxx.xxx/xxxx-xx
-            validate: {
-                validator: (v) => {
-                    return /\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/.test(v);
-                },
-                message: props => `${props.value} não é um "cnpj" valido!`
-            }
+            validate: Validator.validate.isCNPJ
         },
-        descricao: {
-            type: String
-        },
-        endereco: {
-            type: 'ObjectId',
-            ref: 'Endereco'
+        historia: {
+            type: 'String',
+            trim: true,
+            maxlength: 512,
         },
         responsavel: {
             nome: {
-                type: String,
-                required: [true, 'A propriedade "responsavel.nome" é obrigatória!'],
+                type: 'String',
+                trim: true,
+                maxlength: 64,
+                required: true
             },
             email: {
-                type: String,
-                required: [true, 'A propriedade "responsavel.email" é obrigatória!'],
-                validate: {
-                    validator: (v) => validator.isEmail(v),
-                    message: props => `${props.value} não é um "responsavel.email" valido!`
-                }
+                type: 'String',
+                trim: true,
+                maxlength: 64,
+                required: true,
+                validate: Validator.validate.isEmail
             },
             telefone: {
-                type: String,
-                required: [true, 'A propriedade "responsavel.telefone" é obrigatória!'],
-                validate: {
-                    validator: (v) => {
-                        return /\(\d{2}\)\d?\d{4}-\d{4}/.test(v);
-                    },
-                    message: props => `${props.value} não é um "responsavel.telefone" valido!`
-                }
+                type: 'String',
+                trim: true,
+                required: true,
+                validate: Validator.validate.isTelefone
             }
         }
     });
 
-    AbrigoSchema.plugin(uniqueValidator);
-
-    return Mongoose.model('Abrigo', AbrigoSchema);
+    return mongoose.model('Abrigo', schema);
 }

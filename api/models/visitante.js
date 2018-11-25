@@ -9,10 +9,6 @@ module.exports = (api) => {
             type: 'ObjectId',
             ref: 'File'
         },
-        abrigo: {
-            type: 'ObjectId',
-            ref: 'Abrigo'
-        },
         usuario: {
             type: 'ObjectId',
             ref: 'Usuario',
@@ -23,19 +19,28 @@ module.exports = (api) => {
             type: 'ObjectId',
             ref: 'Endereco'
         },
+        solicitacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Solicitacao'
+            }
+        ],
+        doacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Doacao'
+            }
+        ],
         nome: {
             type: 'String',
             trim: true,
             maxlength: 64,
             required: true
         },
-        telefone: {
-            type: 'String',
-            trim: true,
-            required: true,
-            validate: Validator.validate.isTelefone
+        dataNascimento: {
+            type: 'Date'
         }
     });
 
-    return mongoose.model('Funcionario', schema);
+    return mongoose.model('Visitante', schema);
 }

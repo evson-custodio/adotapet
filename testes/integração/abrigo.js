@@ -2,13 +2,12 @@ let defaultAbrigo = {
     "fotoPerfil": "5b82fb5f624db51c0c1f6cf4",
     "nome": "Abrigo de Testes",
     "email": "testes@adotapet.com",
-    "telefone": "(27)9986-81478",
-    "descricao": "Este é um abrigo criado pelo teste de integração.",
+    "telefone": "(27) 9986-1478",
     "cnpj": "43.165.473/0001-51",
     "responsavel": {
         "nome": "Will Smith",
         "email": "will@gmail.com",
-        "telefone": "(27)9986-81478"
+        "telefone": "(27) 9986-1478"
     },
     "endereco" : null
 }
@@ -51,27 +50,8 @@ describe('Rota: Abrigo', function() {
                 .send(defaultAbrigo)
                 .end((err, res) => {   
                     a = res.body;
-                    
-                    assert.equal(a.descricao, defaultAbrigo.descricao);                  
-                    assert.equal(a.email, defaultAbrigo.email);                  
-                   
-                    assert.equal(a.endereco.bairro, defaultAbrigo.endereco.bairro);                  
-                    assert.equal(a.endereco.cidade, defaultAbrigo.endereco.cidade);                  
-                    assert.equal(a.endereco.complemento, defaultAbrigo.endereco.complemento);                  
-                    assert.equal(a.endereco.logradouro, defaultAbrigo.endereco.logradouro);                  
-                    assert.equal(a.endereco.numero, defaultAbrigo.endereco.numero);                  
-                    assert.equal(a.endereco.pais, defaultAbrigo.endereco.pais);                  
-                    assert.equal( a.endereco.uf, defaultAbrigo.endereco.uf);                  
-                  
-                    assert.equal(a.fotoPerfil, defaultAbrigo.fotoPerfil);                  
-                    assert.equal(a.nome, defaultAbrigo.nome);                  
-                    
-                    assert.equal(a.responsavel.email, defaultAbrigo.responsavel.email);                  
-                    assert.equal(a.responsavel.nome, defaultAbrigo.responsavel.nome);                  
-                    assert.equal(a.responsavel.telefone, defaultAbrigo.responsavel.telefone);   
-                    
-                    assert.equal(a.telefone, defaultAbrigo.telefone);          
-                    
+                    assert.isTrue(isSubset(a, defaultAbrigo));
+                                            
                     ultimoAbrigoInseridoId = a._id;
                     done(err);
                 });
@@ -119,13 +99,12 @@ describe('Rota: Abrigo', function() {
     describe('PUT /abrigo/{id}', () => {
         it('edita um abrigo', done => {            
             defaultAbrigo.nome = "DogHouse";
-            defaultAbrigo.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";            
+            defaultAbrigo.email = "email@doghouse.com";        
             request
                 .put('/api/abrigo/' + ultimoAbrigoInseridoId)
                 .send(defaultAbrigo)
                 .end((err, res) => {
                     assert.equal(res.body.nome, defaultAbrigo.nome);                  
-                    assert.equal(res.body.descricao, defaultAbrigo.descricao);    
                     assert.equal(res.body.email, defaultAbrigo.email); 
                     done(err);
                 });

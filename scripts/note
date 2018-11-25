@@ -1,0 +1,6 @@
+translateRuntimeError => Em tempo de execução, traduzir mensagens dinâmicas de Cast
+mongoose/lib/error/cast.js
+
+transformInput => Transforma a entrada para que aceite o máximo de formatos possíveis e converte em um formato minimalista
+
+transformOutput => Transforma a saída para que condiga com o esperado.

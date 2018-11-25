@@ -1,51 +1,62 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
-
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    const Schema = api.mongoose.Mongoose.Schema;
+    const Validator = api.util.validator;
 
-    const EnderecoSchema = new Schema({
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
+
+    const schema = new Schema({
         logradouro: {
-            type: String,
-            required: [true, 'A propriedade "logradouro" é obrigatória!']
+            type: 'String',
+            trim: true,
+            maxlength: 64,
+            required: true
         },
         numero: {
-            type: String,
-            default: 's/n'
+            type: 'String',
+            trim: true,
+            uppercase: true,
+            maxlength: 6,
+            default: 'S/N',
+            validate: Validator.validate.isNumero
         },
         bairro: {
-            type: String,
-            required: [true, 'A propriedade "bairro" é obrigatória!']
+            type: 'String',
+            trim: true,
+            maxlength: 32,
+            required: true
         },
         cidade: {
-            type: String,
-            required: [true, 'A propriedade "cidade" é obrigatória!']
+            type: 'String',
+            trim: true,
+            maxlength: 32,
+            required: true
         },
         uf: {
-            type: String,
-            required: [true, 'A propriedade "uf" é obrigatória!']
+            type: 'String',
+            trim: true,
+            uppercase: true,
+            minlength: 2,
+            maxlength: 2,
+            required: true
         },
         pais: {
-            type: String,
-            required: [true, 'A propriedade "pais" é obrigatória!']
+            type: 'String',
+            trim: true,
+            maxlength: 32,
+            required: true
         },
         cep: {
-            type: String,
+            type: 'String',
+            trim: true,
             default: 'Não Informado',
-            validate: {
-                validator: (v) => {
-                    return /\d{2}\.\d{3}-\d{3}/.test(v);
-                },
-                message: props => `${props.value} não é um "cep" valido!`
-            }
+            validate: Validator.validate.isCEP
         },
         complemento: {
-            type: String
+            type: 'String',
+            trim: true,
+            maxlength: 64
         }
     });
 
-    EnderecoSchema.plugin(uniqueValidator);
-
-    return Mongoose.model('Endereco', EnderecoSchema);
+    return mongoose.model('Endereco', schema);
 }

@@ -1,109 +1,141 @@
-const uniqueValidator = require('mongoose-unique-validator');
-const validator = require('validator');
-
 module.exports = (api) => {
-    const Mongoose = api.mongoose.Mongoose;
-    // const Mongoose = require('mongoose');
-    const Schema = api.mongoose.Mongoose.Schema;
-    // const Schema = Mongoose.Schema;
+    const Validator = api.util.validator;
     
-    const PetSchema = new Schema({
+    const mongoose = api.mongoose;
+    const Schema = mongoose.Schema;
+    
+    const schema = new Schema({
         fotoPerfil: {
             type: 'ObjectId',
             ref: 'File'
-        },                
+        },
         abrigo: {
             type: 'ObjectId',
-            ref: 'Abrigo',
-            required: [true, 'A propriedade "abrigo" é obrigatória!']
+            ref: 'Abrigo'
         },
-        nome: {
-            type: String,
-            required: [true, 'A propriedade "nome" é obrigatória!']
-        },
-        idade: {
-            type: String,
-            required: [true, 'A propriedade "idade" é obrigatória!']
-        },
-        especie: {
-            type: String,
-            required: [true, 'A propriedade "especie" é obrigatória!']
-        },
-        raca: {
-            type: String,
-            required: [true, 'A propriedade "raca" é obrigatória!']
-        },
-        pelagem: {
-            type: String,
-            required: [true, 'A propriedade "pelagem" é obrigatória!']
-        },
-        peso: {
-            type: String,
-            required: [true, 'A propriedade "peso" é obrigatória!']
-        },
-        porte: {
-            type: String,
-            trim: true,
-            required: [true, 'A propriedade "porte" é obrigatória!'],
-            validate: {
-                validator: (v) => {
-                    return /Mini|Pequeno|Médio|Grande|Gigante/.test(v);
-                },
-                message: props => `${props.value} não é um "porte" valido!`
-            }
-        },
-        historia: {
-            type: String,
-            required: false
-        },
-        sexo: {
-            type: Boolean,
-            required: [true, 'A propriedade "sexo" é obrigatória!']
-        },
-        castrado: {
-            type: Boolean,
-            required: [true, 'A propriedade "castrado" é obrigatória!']
-        },
-        medicamentoEspecifico: {
-            type: Boolean,
-            required: [true, 'A propriedade "medicamentoEspecifico" é obrigatória!']
-        },
-        medicamentos: [
+        solicitacoes: [
             {
                 type: 'ObjectId',
-                ref: 'Medicamento'
-            }
-        ],        
-        alimentacaoEspecifica: {
-            type: Boolean,
-            required: [true, 'A propriedade "alimentacaoEspecifica" é obrigatória!']
-        },
-        alimentacoes: [
-            {
-                type: String,
+                ref: 'Solicitacao'
             }
         ],
-        disponivelAdocao: {
-            type: Boolean,
-            required: [true, 'A propriedade "disponivelAdocao" é obrigatória!']
+        estado: {
+            type: 'String',
+            trim: true,
+            enum: [
+                'Não Disponível para Adoção',
+                'Disponível para Adoação',
+                'Avaliando os Candidatos à Adoção',
+                'Adotado'
+            ],
+            default: 'Não Disponível para Adoção'
         },
-        deficienciaDoenca: {
-            type: String,
-            required: false,
-        },
-        vacinacao: [
+        vacinacoes: [
             {
                 type: 'ObjectId',
                 ref: 'Vacina'
             }
+        ],         
+        medicamentosEspecificos: [
+            {
+                type: 'ObjectId',
+                ref: 'Medicamento'
+            }
         ],
-        caracteristica: {
-            type: 'ObjectId',
-            ref: 'Caracteristica'
+        alimentacoesEspecificas: [
+            {
+                type: 'String',
+                trim: true
+            }
+        ],
+        deficienciasOuDoencas: [
+            {
+                type: 'String',
+                trim: true
+            }
+        ],
+        nome: {
+            type: 'String',
+            trim: true,
+            maxlenght: 16,
+            required: true
+        },
+        dataNascimento: {
+            type: 'Date',
+            required: true
+        },
+        especie: {
+            type: 'String',
+            trim: true,
+            required: true
+        },
+        raca: {
+            type: 'String',
+            trim: true,
+            required: true
+        },
+        pelagem: {
+            type: 'String',
+            trim: true,
+            required: true
+        },
+        peso: {
+            type: 'Number',
+            required: true
+        },
+        porte: {
+            type: 'String',
+            trim: true,
+            required: true
+        },
+        historia: {
+            type: 'String',
+            trim: true,
+            maxlenght: 512
+        },
+        sexo: {
+            type: 'Boolean',
+            required: true
+        },
+        castrado: {
+            type: 'Boolean',
+            required: true
+        },
+        caracteristicas: {
+            grauBrincalhao: {
+                type: 'Number',
+                required: true
+            },
+            grauEnergia: {
+                type: 'Number',
+                required: true
+            },
+            grauAmizadeComAnimais: {
+                type: 'Number',
+                required: true
+            },
+            grauAmizadoComCriancas: {
+                type: 'Number',
+                required: true
+            },
+            grauAmizadeComDesconhecidos: {
+                type: 'Number',
+                required: true
+            },
+            grauProtecao: {
+                type: 'Number',
+                required: true
+            },
+            grauAgressividade: {
+                type: 'Number',
+                required: true
+            },
+            grauFobiaAoRuido: {
+                type: 'Number',
+                required: true
+            }
         }
     });
 
-    PetSchema.plugin(uniqueValidator);
-
-    return Mongoose.model('Pet', PetSchema);
+    return mongoose.model('Pet', schema);
 }
