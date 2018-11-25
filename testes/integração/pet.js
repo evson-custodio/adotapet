@@ -202,7 +202,7 @@ describe('Rota: Pet', function() {
                 .put('/api/pet/' + ultimoPetInseridoId)               
                 .send(pet)
                 .end((err, res) => {                 
-                    assert.notEqual(res.body.porte, pet.porte);     
+                    assert.equal(res.body.errors.porte.name, "ValidatorError"); 
                     done(err);
                 });
         });
@@ -219,6 +219,18 @@ describe('Rota: Pet', function() {
                     done(err);
                 });
         });
+    });
+
+    describe('GET /abrigo', () => {
+        it('retorna a busca de um pet dado seu nome', done => {
+            request
+                .get('/api/pet?nome=' + defaultPet.nome)
+                .end(function(err, res){
+                    let pets = res.body;                    
+                    assert.equal(pets[0].nome, defaultPet.nome);                  
+                    done(err);
+                });
+        }); 
     });
     
     describe('Deleta um medicamento vinculado ao pet', function() {        
