@@ -25,6 +25,12 @@ module.exports = (api) => {
                 ref: 'Pet'
             }
         ],
+        doacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Doacao'
+            }
+        ],
         nome: {
             type: 'String',
             trim: true,

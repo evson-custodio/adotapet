@@ -22,12 +22,12 @@ module.exports = (api) => {
         estado: {
             type: 'String',
             trim: true,
-            // enum: [
-            //     'Não Disponível para Adoção',
-            //     'Disponível para Adoação',
-            //     'Avaliando os Candidatos à Adoção',
-            //     'Adotado'
-            // ],
+            enum: [
+                'Não Disponível para Adoção',
+                'Disponível para Adoação',
+                'Avaliando os Candidatos à Adoção',
+                'Adotado'
+            ],
             default: 'Não Disponível para Adoção'
         },
         vacinacoes: [

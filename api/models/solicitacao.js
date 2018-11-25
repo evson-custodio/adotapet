@@ -16,8 +16,16 @@ module.exports = (api) => {
             required: true
         },
         questionario: {
-            rendaMensal: {
-                type: 'Number',
+            faixaSalarial: {
+                type: 'String',
+                trim: true,
+                enum: [
+                    'R$ 400,00 à 600,00',
+                    'R$ 600,00 à 1.200,00',
+                    'R$ 1.200,00 à 1.600,00',
+                    'R$ 1.600,00 à 2.600,00',
+                    'Mais de R$ 2.600,00',
+                ],
                 required: true
             },
             teveAnimais: {
