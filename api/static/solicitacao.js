@@ -16,7 +16,7 @@ function Solicitacao() {
         'Recusada'
     ],
     this.default = {
-        data: new Date(Date.now()),
+        data: new Date(Date.now() - (2 * 60 * 60 * 1000)),
         status: this.status[0]
     }
 }
