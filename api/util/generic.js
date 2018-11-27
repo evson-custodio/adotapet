@@ -2,6 +2,25 @@ const debug = require('debug')('adotapet:api:util:generic');
 const express = require('express');
 
 function Generic() {
+    this.getStaticHandler = (static) => (req, res, next) => {
+        res.status(200).json(static);
+    },
+    this.getStaticEndpoints = (base, router, static) => {
+        if (typeof static == 'object') {
+            const staticKeys = Object.keys(static);
+            staticKeys.forEach(key => console.log(base + key + '/') & this.getStaticEndpoints(base + key + '/', router, static[key]));
+        }
+        router.get(base, this.getStaticHandler(static));
+    },
+    this.getStaticRouter = (api, staticName) => {
+        const static = api.static[staticName.toLocaleLowerCase()];
+
+        const router = express.Router();
+
+        this.getStaticEndpoints('/', router, static);
+
+        return router;
+    },
     this.getController = (api, modelName) => {
         const Model = api.models[modelName.toLocaleLowerCase()];
         return {
@@ -127,8 +146,13 @@ function Generic() {
         return router;
     },
     this.rest = (app, api) => {
+        let staticNames = Object.keys(api.static);
         let routesNames = Object.keys(api.routes);
         let modelsNames = Object.keys(api.models);
+
+        staticNames.forEach(staticName => {
+            app.use('/api/static/' + staticName, this.getStaticRouter(api, staticName));
+        });
     
         routesNames.forEach(routeName => {
             app.use('/api/' + routeName, api.routes[routeName]);

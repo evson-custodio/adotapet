@@ -59,7 +59,7 @@ module.exports = (api) => {
         nome: {
             type: 'String',
             trim: true,
-            maxlenght: 16,
+            maxlength: 16,
             required: true
         },
         dataNascimento: {
@@ -93,7 +93,7 @@ module.exports = (api) => {
         historia: {
             type: 'String',
             trim: true,
-            maxlenght: 512
+            maxlength: 512
         },
         sexo: {
             type: 'Boolean',

@@ -10,7 +10,7 @@ module.exports = (api) => {
         nome: {
             type: 'String',
             trim: true,
-            maxlenght: 64,
+            maxlength: 64,
             required: true
         },
         apresentacao: {
@@ -21,7 +21,7 @@ module.exports = (api) => {
         dosagem: {
             type: 'String',
             trim: true,
-            maxlenght: 64,
+            maxlength: 64,
             required: true
         }
     });

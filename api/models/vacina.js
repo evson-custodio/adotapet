@@ -6,13 +6,13 @@ module.exports = (api) => {
         nome: {
             type: 'String',
             trim: true,
-            maxlenght: 32,
+            maxlength: 32,
             required: true
         },
         descricao: {
             type: 'String',
             trim: true,
-            maxlenght: 256,
+            maxlength: 256,
             required: true
         },
         data: {

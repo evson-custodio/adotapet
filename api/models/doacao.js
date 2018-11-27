@@ -1,6 +1,6 @@
 module.exports = (api) => {
     const Validator = api.util.validator;
-    // const Static = api.static.doacao;
+    const Static = api.static.doacao;
 
     const mongoose = api.mongoose;
     const Schema = mongoose.Schema;
@@ -13,14 +13,13 @@ module.exports = (api) => {
         },
         doador: {
             type: 'ObjectId',
-            ref: 'Visitante',
-            required: true
+            ref: 'Visitante'
         },
         status: {
             type: 'String',
             trim: true,
-            // enum: Static.status.values,
-            // default: Static.status.default
+            enum: Static.status,
+            default: Static.default.status
         },
         quantidade: {
             type: 'Number',
@@ -29,10 +28,23 @@ module.exports = (api) => {
             required: true
         },
         item: {
+            nome: {
+                type: 'String',
+                trim: true,
+                enum: Static.item.map(value => value.nome),
+                required: true
+            },
+            categoria: {
+                type: 'String',
+                trim: true,
+                enum: Static.item.map(value => value.categoria).filter((value, index, array) => array.indexOf(value) == index),
+                required: true
+            }
+        },
+        descricao: {
             type: 'String',
             trim: true,
-            // enum: Static.item.values,
-            required: true
+            maxlength: 256
         }
     });
 
