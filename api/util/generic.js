@@ -8,7 +8,7 @@ function Generic() {
     this.getStaticEndpoints = (base, router, static) => {
         if (typeof static == 'object') {
             const staticKeys = Object.keys(static);
-            staticKeys.forEach(key => console.log(base + key + '/') & this.getStaticEndpoints(base + key + '/', router, static[key]));
+            staticKeys.forEach(key => this.getStaticEndpoints(base + key + '/', router, static[key]));
         }
         router.get(base, this.getStaticHandler(static));
     },
@@ -151,7 +151,7 @@ function Generic() {
         let modelsNames = Object.keys(api.models);
 
         staticNames.forEach(staticName => {
-            app.use('/api/static/' + staticName, this.getStaticRouter(api, staticName));
+            app.use('/api/' + staticName + '/static', this.getStaticRouter(api, staticName));
         });
     
         routesNames.forEach(routeName => {

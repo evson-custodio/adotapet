@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Validator = api.util.validator;
+    const Static = api.static.solicitacao;
 
     const mongoose = api.mongoose;
     const Schema = mongoose.Schema;
@@ -19,14 +20,7 @@ module.exports = (api) => {
             faixaSalarial: {
                 type: 'String',
                 trim: true,
-                enum: [
-                    'Menos que R% 400,00',
-                    'R$ 400,00 à 600,00',
-                    'R$ 600,00 à 1.200,00',
-                    'R$ 1.200,00 à 1.600,00',
-                    'R$ 1.600,00 à 2.600,00',
-                    'Mais de R$ 2.600,00',
-                ],
+                enum: Static.questionario.faixaSalarial,
                 required: true
             },
             teveAnimais: {
@@ -66,18 +60,13 @@ module.exports = (api) => {
         },
         data: {
             type: 'Date',
-            default: Date.now
+            default: Static.default.data
         },
         status: {
             type: 'String',
             trim: true,
-            enum: [
-                'Pendente',
-                'Avaliando',
-                'Aceita',
-                'Recusada'
-            ],
-            default: 'Pendente'
+            enum: Static.status,
+            default: Static.default.status
         },
         motivo: {
             type: 'String',

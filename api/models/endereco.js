@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Validator = api.util.validator;
+    const Static = api.static.endereco;
 
     const mongoose = api.mongoose;
     const Schema = mongoose.Schema;
@@ -16,7 +17,7 @@ module.exports = (api) => {
             trim: true,
             uppercase: true,
             maxlength: 6,
-            default: 'S/N',
+            default: Static.default.numero,
             validate: Validator.validate.isNumero
         },
         bairro: {
@@ -48,7 +49,7 @@ module.exports = (api) => {
         cep: {
             type: 'String',
             trim: true,
-            default: 'Não Informado',
+            default: Static.default.cep,
             validate: Validator.validate.isCEP
         },
         complemento: {

@@ -1,5 +1,6 @@
 module.exports = (api) => {
     const Validator = api.util.validator;
+    const Static = api.static.pet;
     
     const mongoose = api.mongoose;
     const Schema = mongoose.Schema;
@@ -20,16 +21,11 @@ module.exports = (api) => {
                     ref: 'Solicitacao'
                 }
             ],
-            estado: {
+            status: {
                 type: 'String',
                 trim: true,
-                enum: [
-                    'Não Disponível para Adoção',
-                    'Disponível para Adoação',
-                    'Avaliando os Candidatos à Adoção',
-                    'Adotado'
-                ],
-                default: 'Não Disponível para Adoção'
+                enum: Static.adocao.status,
+                default: Static.default.adocao.status
             }
         },
         vacinacoes: [
