@@ -12,7 +12,7 @@ module.exports = (schema, api) => {
         
         if (path in schema.relationship) {
             type.validate(value => new Promise(resolve => {
-                if (value != '') {
+                if (value != '' && value != null) {
                     schema.relationship[path]
                     .findOne({_id: value})
                     .exec()

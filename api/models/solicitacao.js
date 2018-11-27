@@ -20,6 +20,7 @@ module.exports = (api) => {
                 type: 'String',
                 trim: true,
                 enum: [
+                    'Menos que R% 400,00',
                     'R$ 400,00 à 600,00',
                     'R$ 600,00 à 1.200,00',
                     'R$ 1.200,00 à 1.600,00',

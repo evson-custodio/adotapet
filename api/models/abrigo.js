@@ -25,6 +25,12 @@ module.exports = (api) => {
                 ref: 'Pet'
             }
         ],
+        solicitacoes: [
+            {
+                type: 'ObjectId',
+                ref: 'Solicitacao'
+            }
+        ],
         doacoes: [
             {
                 type: 'ObjectId',

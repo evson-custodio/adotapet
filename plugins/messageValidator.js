@@ -1,9 +1,31 @@
 module.exports = (schema, options) => {
     schema.eachPath((path, type) => {
+        let min = type.validators.find(value => value.type == 'min');
+        let max = type.validators.find(value => value.type == 'max');
         let minlength = type.validators.find(value => value.type == 'minlength');
         let maxlength = type.validators.find(value => value.type == 'maxlength');
         let required = type.validators.find(value => value.type == 'required');
         let unique = type.validators.find(value => value.type == 'unique');
+
+        if (min != null && max != null) {
+            let message = null;
+            if (min.min == max.max) {
+                message = `A propriedade '${path}' deve possuir o valor ${min.min}!`;
+            }
+            else {
+                message = `A propriedade '${path}' deve possuir valor entre ${min.min} e ${max.max}!`;
+            }
+            min.message = message;
+            max.message = message;
+        }
+        else if (min != null) {
+            let message = `A propriedade '${path}' deve possuir valor no mínimo ${min.min}!`;
+            min.message = message;
+        }
+        else if (max != null) {
+            let message = `A propriedade '${path}' deve possuir valor no máximo ${max.max}!`;
+            max.message = message;
+        }
 
         if (minlength != null && maxlength != null) {
             let message = null;
@@ -21,7 +43,7 @@ module.exports = (schema, options) => {
             minlength.message = message;
         }
         else if (maxlength != null) {
-            let message = `A propriedade '${path}' deve possuir no mínimo ${maxlength.maxlength} caracteres!`;
+            let message = `A propriedade '${path}' deve possuir no máximo ${maxlength.maxlength} caracteres!`;
             maxlength.message = message;
         }
 
