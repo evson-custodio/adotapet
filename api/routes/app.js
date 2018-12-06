@@ -5,6 +5,7 @@ module.exports = (api) => {
 
     const router = express.Router();
 
+    router.get('/qrcode', AppController.qrcode);
     router.get('/download', AppController.download);
 
     return router;
